@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why the Non-Invertible Symmetry Requires N_g = N_c = 3</title>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+    body {
+      font-family: "Georgia", serif;
+      max-width: 860px;
+      margin: 60px auto;
+      padding: 0 30px;
+      line-height: 1.8;
+      color: #222;
+      background: #fafafa;
+    }
+    h1 {
+      font-size: 1.6em;
+      border-bottom: 2px solid #444;
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+    }
+    h2 {
+      font-size: 1.2em;
+      margin-top: 40px;
+      color: #1a1a6e;
+    }
+    h3 {
+      font-size: 1.05em;
+      color: #333;
+      margin-top: 30px;
+    }
+    .step {
+      background: #fff;
+      border-left: 4px solid #1a1a6e;
+      padding: 16px 20px;
+      margin: 24px 0;
+      border-radius: 0 6px 6px 0;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+    .step-title {
+      font-weight: bold;
+      color: #1a1a6e;
+      font-size: 1.05em;
+      margin-bottom: 8px;
+    }
+    .punchline {
+      background: #f0f4ff;
+      border: 1px solid #b0bcee;
+      padding: 18px 22px;
+      border-radius: 6px;
+      margin-top: 36px;
+    }
+    .punchline-title {
+      font-weight: bold;
+      font-size: 1.05em;
+      color: #1a1a6e;
+      margin-bottom: 8px;
+    }
+    .eq-block {
+      margin: 18px 0;
+      overflow-x: auto;
+    }
+    .ref {
+      font-size: 0.85em;
+      color: #555;
+      font-style: italic;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #ddd;
+      margin: 40px 0;
+    }
+    .context-box {
+      background: #fffbe6;
+      border: 1px solid #e6d87a;
+      padding: 14px 18px;
+      border-radius: 6px;
+      margin-bottom: 30px;
+      font-size: 0.95em;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Why the Non-Invertible Symmetry Requires $N_g = N_c = 3$</h1>
+
+<div class="context-box">
+  <strong>Context.</strong> This is an explanation of a key claim in
+  <em>Non-Invertible Peccei-Quinn Symmetry and the Massless Quark Solution to the Strong CP Problem</em>
+  (Córdova, Hong, Koren; arXiv:2402.12453).
+  The authors construct a non-invertible Peccei-Quinn symmetry that protects $\bar\theta = 0$,
+  and state that this symmetry exists <em>only</em> because the Standard Model has
+  $N_g = N_c = 3$ (3 generations = 3 colors).
+  The argument is a chain of three steps.
+</div>
+
+<!-- STEP 1 -->
+<div class="step">
+  <div class="step-title">Step 1 &mdash; A special $\mathbb{Z}_3$ identification exists in the SM</div>
+
+  <p>
+    The authors consider extending the SM by a gauged horizontal baryon-number symmetry
+  </p>
+  <div class="eq-block">
+    $$U(1)_H \;=\; B_1 + B_2 - 2B_3,$$
+  </div>
+  <p>
+    where $B_i$ is the baryon number of generation $i$.
+    A crucial observation is that, with the SM matter content, four completely independent $\mathbb{Z}_3$ subgroups — one from $SU(3)_C$, one from $U(1)_Y$, one from $U(1)_B$, and one from $U(1)_H$ — all act <em>identically</em> on every field:
+  </p>
+  <div class="eq-block">
+    $$\left[\mathbb{Z}_3^{H} \subset U(1)_H\right]
+      \;=\; \left[\mathbb{Z}_3^{C} \subset SU(3)_C\right]
+      \;=\; \left[\mathbb{Z}_3^{Y} \subset U(1)_Y\right]
+      \;=\; \left[\mathbb{Z}_3^{B} \subset U(1)_B\right].$$
+  </div>
+  <p>
+    <strong>Why does this need $N_g = N_c$?</strong>
+    The $\mathbb{Z}_3$ of baryon number acts on quarks as a phase $e^{2\pi i/3}$
+    (since each quark carries baryon number $1/3$ and there are 3 of them per baryon).
+    This is identical to the $\mathbb{Z}_3$ center of $SU(3)_C$ acting on the fundamental representation.
+    This coincidence — that the number of colors equals the number of quarks per baryon,
+    which in turn equals the number of generations —
+    is precisely $N_c = N_g = 3$.
+    For any other values, these $\mathbb{Z}_3$ subgroups would not be isomorphic as symmetry actions,
+    and the identification would fail.
+  </p>
+</div>
+
+<!-- STEP 2 -->
+<div class="step">
+  <div class="step-title">Step 2 &mdash; The identification permits a non-trivial gauge group quotient</div>
+
+  <p>
+    Because the diagonal $\mathbb{Z}_3$ above acts trivially on all matter fields,
+    one is free to <em>quotient</em> the gauge group by it without changing the physics
+    of any local operator. The relevant choice is:
+  </p>
+  <div class="eq-block">
+    $$SU(3)_C \times U(1)_H
+    \quad\longrightarrow\quad
+    \frac{SU(3)_C \times U(1)_H}{\mathbb{Z}_3}.$$
+  </div>
+  <p>
+    This quotient has two physical consequences:
+  </p>
+  <ul>
+    <li>
+      It <strong>removes</strong> Wilson lines in certain representations from the spectrum
+      (those charged under the quotiented $\mathbb{Z}_3$).
+    </li>
+    <li>
+      By Dirac quantization, it <strong>admits new magnetic monopoles</strong>
+      carrying $\mathbb{Z}_3$ magnetic charge, corresponding to a new
+      $\mathbb{Z}_3^{(1)}$ magnetic one-form symmetry.
+      These monopoles are the source of <strong>fractional instantons</strong> —
+      gauge field configurations with instanton number valued in $\frac{1}{3}\mathbb{Z}$
+      rather than integers.
+    </li>
+  </ul>
+  <p>
+    Concretely, the $SU(3)_C$ instanton number $\mathcal{N}_C$ can now be fractional,
+    with its fractional part controlled by the discrete magnetic flux
+    $\omega(A_C) \in H^2(M, \mathbb{Z}_3)$:
+  </p>
+  <div class="eq-block">
+    $$\mathcal{N}_C
+      \;=\; \frac{1}{8\pi^2}\int_M \mathrm{Tr}(F_C \wedge F_C)
+      \;=\; \frac{1}{3}\int_M \omega \wedge \omega
+      \quad \bmod 1.$$
+  </div>
+  <p>
+    Furthermore, because the quotient acts simultaneously on both $SU(3)_C$ and $U(1)_H$,
+    the fractional instanton numbers of the two gauge factors are <strong>correlated</strong>:
+  </p>
+  <div class="eq-block">
+    $$\mathcal{N}_C \;=\; 6\,\mathcal{N}_H \quad \bmod 1,$$
+  </div>
+  <p>
+    where $\mathcal{N}_H = \frac{1}{8\pi^2}\int_M F_H \wedge F_H$.
+    The minimal fractional instanton therefore has $\mathcal{N}_H = 1/9$ and $\mathcal{N}_C = 2/3$.
+    This entire option is only available because of the $\mathbb{Z}_3$ identification established in Step 1,
+    which in turn requires $N_g = N_c$.
+  </p>
+</div>
+
+<!-- STEP 3 -->
+<div class="step">
+  <div class="step-title">Step 3 &mdash; Fractional instantons promote an invertible symmetry to a non-invertible one</div>
+
+  <p>
+    With vanishing down-type Yukawa couplings $y_d \to 0$,
+    the SM possesses classical flavor symmetries. The SM-anomaly-free combinations relevant here are:
+  </p>
+  <div class="eq-block">
+    $$A_1 = \bar{d}_3 - \bar{d}_1,\quad
+      A_2 = \bar{d}_3 - \bar{d}_2,\quad
+      A_3 = \tilde{B}_3 - \tilde{B}_1,\quad
+      A_4 = \tilde{B}_3 - \tilde{B}_2,$$
+  </div>
+  <p>where $\tilde{B}_i = Q_i - \bar{u}_i$.</p>
+
+  <h3>Without the $\mathbb{Z}_3$ quotient (ordinary instantons only):</h3>
+  <p>
+    The ABJ anomaly coefficients of each $U(1)_{A_i}$ with standard, integer-quantized instantons are:
+  </p>
+  <div class="eq-block">
+    $$\left[U(1)_{A_i}\right]\left[U(1)_H\right]^2 = 3N_c.$$
+  </div>
+  <p>
+    A GCD analysis shows each $U(1)_{A_i}$ is broken down to a $\mathbb{Z}_{3N_c}$
+    <strong>invertible</strong> discrete symmetry.
+    The down Yukawa is merely a spurion of an ordinary symmetry — nothing prevents it from being nonzero,
+    and $\bar\theta$ is not protected in any deep way.
+  </p>
+
+  <h3>With the $\left(SU(3)_C \times U(1)_H\right)/\mathbb{Z}_3$ quotient (fractional instantons included):</h3>
+  <p>
+    In the background of the minimal fractional instanton ($\mathcal{N}_H = 1/9$, $\mathcal{N}_C = 2/3$),
+    the anomaly coefficient for each $U(1)_{A_i}$ from the color–horizontal (CH) instanton background is:
+  </p>
+  <div class="eq-block">
+    $$\left[U(1)_{A_i}\right][\text{CH}] \;=\; 1.$$
+  </div>
+  <p>
+    The anomaly coefficient is now <strong>1</strong> — the GCD of all contributions is 1 —
+    so the fractional instantons break $U(1)_{A_i}$ <em>completely</em>.
+    In particular, a discrete $\mathbb{Z}_3$ subgroup
+  </p>
+  <div class="eq-block">
+    $$\mathbb{Z}_3^{\tilde{B}+\bar{d}}$$
+  </div>
+  <p>
+    which acts generation-independently, is a non-invertible symmetry.
+    Under this symmetry, <em>all</em> $U(1)_H$-allowed entries of the down Yukawa matrix are forbidden:
+  </p>
+  <div class="eq-block">
+    $$\mathcal{L}_{y_d} \;=\; y_d^{ij}\, H\, Q_i\, \bar{d}_j \;=\; 0
+    \quad \text{enforced by } \mathbb{Z}_3^{\tilde{B}+\bar{d}}.$$
+  </div>
+
+  <h3>Why is this non-invertible rather than just broken?</h3>
+  <p>
+    The fractional instantons that would break $U(1)_{A_i}$ have instanton number
+    $\mathcal{N}_C = 2/3 \notin \mathbb{Z}$.
+    On a topologically trivial spacetime $\mathbb{R}^4$ (or its IR regulator $S^4$),
+    non-abelian instanton numbers are always integers — so these configurations
+    <strong>cannot exist on flat space</strong>.
+    They only become available in topologically non-trivial backgrounds,
+    i.e., in the presence of magnetic charges ('t Hooft lines).
+  </p>
+  <p>
+    This is the defining feature of a <strong>non-invertible symmetry</strong>:
+    the symmetry defect operator implementing a finite $\mathbb{Z}_3$ rotation
+    cannot simply be $\mathcal{D} \times \overline{\mathcal{D}} = 1$; instead it obeys the fusion rule
+  </p>
+  <div class="eq-block">
+    $$\mathcal{D}(\Sigma) \times \overline{\mathcal{D}}(\Sigma)
+      \;\sim\;
+      \sum_{\text{two-cycles } S \subset \Sigma}
+      \exp\!\left(\frac{i}{16\pi N}\int_S F_{\alpha\beta}\, dS_{\mu\nu}\,\varepsilon^{\alpha\beta\mu\nu}\right),$$
+  </div>
+  <p>
+    leaving behind a condensate of magnetic one-form symmetry operators.
+    The symmetry acts correctly on local operators (as a $\mathbb{Z}_3$ selection rule),
+    but fails to be represented by unitary operators on the full Hilbert space —
+    the hallmark of non-invertibility.
+    As a consequence, when $\mathbb{Z}_3^{\tilde{B}+\bar{d}}$ is preserved, the strong CP phase satisfies
+  </p>
+  <div class="eq-block">
+    $$\mathrm{Im}(M) \;=\; \mathrm{Im}\!\left(e^{i\theta}\det(y_u\, y_d)\right) \;=\; 0
+    \quad\Longrightarrow\quad \bar\theta = 0.$$
+  </div>
+</div>
+
+<!-- PUNCHLINE -->
+<div class="punchline">
+  <div class="punchline-title">The Punchline</div>
+  <p>
+    The entire argument is a single chain of logical dependencies:
+  </p>
+  <div class="eq-block">
+    $$\underbrace{N_g = N_c = 3}_{\text{SM accident}}
+    \;\Longrightarrow\;
+    \underbrace{\mathbb{Z}_3^C = \mathbb{Z}_3^H}_{\text{Step 1: identification}}
+    \;\Longrightarrow\;
+    \underbrace{\frac{SU(3)_C \times U(1)_H}{\mathbb{Z}_3}\text{ consistent}}_{\text{Step 2: quotient allowed}}
+    \;\Longrightarrow\;
+    \underbrace{\mathcal{N}_C \in \tfrac{1}{3}\mathbb{Z}}_{\text{fractional instantons exist}}
+    \;\Longrightarrow\;
+    \underbrace{\left[U(1)_{A_i}\right][\text{CH}]=1}_{\text{Step 3: anomaly coeff.} = 1}
+    \;\Longrightarrow\;
+    \underbrace{\mathbb{Z}_3^{\tilde{B}+\bar{d}}\text{ non-invertible}}_{\text{non-invertible PQ symmetry}}
+    \;\Longrightarrow\;
+    \bar\theta = 0.$$
+  </div>
+  <p>
+    Every arrow in this chain breaks if $N_g \neq N_c$.
+    The non-invertible Peccei-Quinn symmetry, and the massless-quark solution to the strong CP problem
+    it enables, are therefore an <em>accidental consequence</em> of the SM having
+    the same number of generations as colors — a numerological coincidence of the SM
+    promoted to a structural symmetry principle.
+  </p>
+</div>
+
+<hr>
+<p class="ref">
+  Based on: C. Córdova, S. Hong, S. Koren,
+  <em>Non-Invertible Peccei-Quinn Symmetry and the Massless Quark Solution to the Strong CP Problem</em>,
+  arXiv:2402.12453.
+</p>
+
+</body>
+</html>

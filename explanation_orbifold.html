@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orbifolds — From Quotient Spaces to String Compactifications</title>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+    body {
+      font-family: "Georgia", serif;
+      max-width: 920px;
+      margin: 60px auto;
+      padding: 0 32px;
+      line-height: 1.85;
+      color: #1a1a1a;
+      background: #fafafa;
+    }
+    h1 { font-size: 1.65em; border-bottom: 2px solid #444; padding-bottom: 10px; }
+    h2 { font-size: 1.25em; color: #1a1a6e; margin-top: 48px; border-left: 4px solid #1a1a6e; padding-left: 12px; }
+    h3 { font-size: 1.05em; color: #333; margin-top: 30px; }
+    .meta { font-style: italic; color: #555; margin-bottom: 34px; }
+    .box {
+      background: #fff;
+      border-left: 4px solid #1a1a6e;
+      padding: 14px 20px;
+      margin: 22px 0;
+      border-radius: 0 6px 6px 0;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+    .highlight {
+      background: #f0f4ff;
+      border: 1px solid #b0bcee;
+      padding: 16px 20px;
+      border-radius: 6px;
+      margin: 22px 0;
+    }
+    .warning {
+      background: #fff8e6;
+      border: 1px solid #e8c84a;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 22px 0;
+    }
+    .key { font-weight: bold; color: #1a1a6e; }
+    .eq { margin: 18px 0; overflow-x: auto; }
+    .caption { text-align: center; font-size: 0.88em; color: #555; font-style: italic; margin-top: -8px; margin-bottom: 20px; }
+    table { border-collapse: collapse; margin: 20px auto; font-size: 0.93em; }
+    th, td { border: 1px solid #bbb; padding: 7px 16px; text-align: center; }
+    th { background: #e8ecf8; }
+    hr { border: none; border-top: 1px solid #ddd; margin: 44px 0; }
+    .ref { font-size: 0.85em; color: #555; font-style: italic; }
+    .summary-chain {
+      background: #fffbe6;
+      border: 1px solid #e6d87a;
+      padding: 18px 24px;
+      border-radius: 6px;
+      margin: 30px 0;
+    }
+    .toc { background: #f4f4f4; padding: 18px 24px; border-radius: 6px; margin-bottom: 40px; }
+    .toc ol { margin: 0; padding-left: 22px; }
+    .toc li { margin: 4px 0; }
+    .toc a { color: #1a1a6e; text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    svg text { font-family: "Georgia", serif; }
+  </style>
+</head>
+<body>
+
+<h1>Orbifolds: From Quotient Spaces to String Compactifications</h1>
+<p class="meta">
+  A self-contained explanation for readers with QFT and GR background.
+  Connects to the magnetized orbifold models of arXiv:0806.4748.
+</p>
+
+<div class="toc">
+  <strong>Contents</strong>
+  <ol>
+    <li><a href="#s1">What is an Orbifold? The Core Idea</a></li>
+    <li><a href="#s2">The Simplest Example: $\mathbb{R}^1/\mathbb{Z}_2$ and $S^1/\mathbb{Z}_2$</a></li>
+    <li><a href="#s3">Geometry at Fixed Points: Conical Singularities</a></li>
+    <li><a href="#s4">The Torus Orbifold $T^2/\mathbb{Z}_2$: Fixed Points and Fundamental Domain</a></li>
+    <li><a href="#s5">Fields on an Orbifold: The Projection Condition</a></li>
+    <li><a href="#s6">Mode Expansion and the KK Spectrum on $S^1/\mathbb{Z}_2$</a></li>
+    <li><a href="#s7">Spinors and the $\mathbb{Z}_2$ Action: Why There Is a Phase</a></li>
+    <li><a href="#s72">The Gauge Embedding $P$: What It Is and Why It Must Exist</a></li>
+    <li><a href="#s8">Why Orbifolds Break Supersymmetry</a></li>
+    <li><a href="#s9">Twisted Sectors in String Theory</a></li>
+    <li><a href="#s10">The Full Orbifold $T^6/(\mathbb{Z}_2\times\mathbb{Z}'_2)$ in Model Building</a></li>
+    <li><a href="#s11">Summary: The Orbifold as a Tool</a></li>
+  </ol>
+</div>
+
+
+<!-- ============================================================ -->
+<h2 id="s1">1. What is an Orbifold? The Core Idea</h2>
+
+<p>
+  You are already familiar with quotient spaces from GR and topology. The simplest example is the torus:
+  take $\mathbb{R}^n$ and identify points related by a lattice $\Lambda$,
+</p>
+<div class="eq">
+$$T^n = \mathbb{R}^n / \Lambda.$$
+</div>
+<p>
+  The lattice acts <em>freely</em> — no point of $\mathbb{R}^n$ is fixed by any non-trivial lattice element.
+  The result is a perfectly smooth manifold.
+</p>
+
+<p>
+  An <strong>orbifold</strong> is what you get when you further quotient by a discrete (finite) group $G$
+  that does <em>not</em> act freely — some points are left fixed. Formally:
+</p>
+<div class="eq">
+$$\mathcal{O} = M / G,$$
+</div>
+<p>
+  where $M$ is a smooth manifold and $G$ is a finite group acting on it by isometries.
+  The non-free action means there exist <strong>fixed points</strong> $p \in M$ with $g \cdot p = p$
+  for some $g \neq e$.
+  At those points the quotient space is locally a cone — it is <em>singular</em> as a manifold,
+  but perfectly well-defined as a topological (and even metric) space.
+</p>
+
+<div class="box">
+  <span class="key">Orbifold vs. manifold:</span>
+  A manifold is locally homeomorphic to $\mathbb{R}^n$.
+  An orbifold is locally homeomorphic to $\mathbb{R}^n / \Gamma$, where $\Gamma$ is a finite group
+  (the <em>local isotropy group</em>, possibly trivial). At generic points $\Gamma = \{e\}$ and
+  the orbifold looks like a manifold. At fixed points $\Gamma \neq \{e\}$ and there is a genuine singularity.
+</div>
+
+<p>
+  In physics, orbifolds are used as compactification spaces
+  because they are <em>exactly solvable</em> as string backgrounds (unlike generic Calabi-Yau manifolds),
+  yet they break supersymmetry in controlled ways and can give chiral spectra.
+</p>
+
+
+<!-- ============================================================ -->
+<h2 id="s2">2. The Simplest Example: $\mathbb{R}^1/\mathbb{Z}_2$ and $S^1/\mathbb{Z}_2$</h2>
+
+<h3>2.1 &nbsp; $\mathbb{R}/\mathbb{Z}_2$: the half-line</h3>
+<p>
+  Consider the real line $\mathbb{R}$ with the $\mathbb{Z}_2$ action $y \mapsto -y$.
+  Two points $y$ and $-y$ are identified. The quotient is the half-line $[0,\infty)$.
+  The unique fixed point is $y = 0$ — it maps to itself.
+  Near $y = 0$ the space looks like two half-lines glued at their common endpoint:
+  locally it is a "half-plane" or, in 1D, just a boundary.
+</p>
+
+<h3>2.2 &nbsp; $S^1/\mathbb{Z}_2$: the interval</h3>
+<p>
+  More useful is the circle $S^1$, with coordinate $y \sim y + 2\pi R$, quotiented by $y \mapsto -y$.
+  (Equivalently, $y \sim y + 2\pi R$ and $y \sim -y$.)
+  The fundamental domain is $y \in [0, \pi R]$. There are <strong>two fixed points</strong>:
+</p>
+<div class="eq">
+$$y^* = 0 \quad \text{and} \quad y^* = \pi R.$$
+</div>
+<p>
+  At $y=0$: the identification $y \to -y$ maps $y \to 0$ for $y$ near 0, so $y=0$ is fixed.
+  At $y = \pi R$: $-(\pi R) \equiv 2\pi R - \pi R = \pi R$ (after the periodicity $y \sim y+2\pi R$), so $\pi R$ is also fixed.
+  The quotient $S^1/\mathbb{Z}_2$ is topologically an <strong>interval</strong> $[0,\pi R]$,
+  with each endpoint being an orbifold fixed point.
+</p>
+
+<!-- SVG diagram of S^1/Z_2 -->
+<div style="text-align:center; margin: 30px 0;">
+<svg width="500" height="130" viewBox="0 0 500 130">
+  <!-- Circle -->
+  <ellipse cx="130" cy="65" rx="80" ry="50" fill="none" stroke="#1a1a6e" stroke-width="2"/>
+  <!-- Fixed points on circle -->
+  <circle cx="210" cy="65" r="5" fill="#c0392b"/>
+  <circle cx="50"  cy="65" r="5" fill="#c0392b"/>
+  <text x="218" y="60" font-size="13" fill="#c0392b">$y=0$</text>
+  <text x="10"  y="60" font-size="13" fill="#c0392b">$y=\pi R$</text>
+  <text x="100" y="130" font-size="13" fill="#555">$S^1$</text>
+  <!-- Arrow -->
+  <text x="235" y="72" font-size="22" fill="#444">→</text>
+  <text x="234" y="58" font-size="11" fill="#444">$\mathbb{Z}_2$</text>
+  <!-- Interval -->
+  <line x1="280" y1="65" x2="460" y2="65" stroke="#1a1a6e" stroke-width="2.5"/>
+  <circle cx="280" cy="65" r="5" fill="#c0392b"/>
+  <circle cx="460" cy="65" r="5" fill="#c0392b"/>
+  <text x="266" y="90" font-size="13" fill="#c0392b">$0$</text>
+  <text x="453" y="90" font-size="13" fill="#c0392b">$\pi R$</text>
+  <text x="350" y="100" font-size="13" fill="#555">$S^1/\mathbb{Z}_2$</text>
+</svg>
+</div>
+<p class="caption">The circle $S^1$ quotiented by $y\mapsto -y$ gives an interval. The two endpoints are orbifold fixed points.</p>
+
+
+<!-- ============================================================ -->
+<h2 id="s3">3. Geometry at Fixed Points: Conical Singularities</h2>
+
+<p>
+  To see why fixed points are singular, consider $\mathbb{R}^2$ with $\mathbb{Z}_2: (x,y) \mapsto (-x,-y)$
+  (equivalently, $r e^{i\theta} \mapsto r e^{i(\theta+\pi)}$ in polar coordinates, or $\theta \sim \theta + \pi$).
+  The quotient $\mathbb{R}^2/\mathbb{Z}_2$ has angular coordinate $\theta \in [0,\pi)$
+  instead of $[0, 2\pi)$: it is a <strong>cone</strong> with half the opening angle.
+</p>
+
+<div style="text-align:center; margin: 28px 0;">
+<svg width="480" height="140" viewBox="0 0 480 140">
+  <!-- Full plane -->
+  <circle cx="110" cy="70" r="60" fill="#e8ecf8" stroke="#1a1a6e" stroke-width="1.5"/>
+  <line x1="110" y1="70" x2="170" y2="70" stroke="#1a1a6e" stroke-width="1.5"/>
+  <path d="M 150 70 A 40 40 0 1 1 110 30" fill="none" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="155" y="55" font-size="12" fill="#888">$2\pi$</text>
+  <text x="75" y="130" font-size="13" fill="#555">$\mathbb{R}^2$</text>
+  <circle cx="110" cy="70" r="4" fill="#c0392b"/>
+  <!-- arrow -->
+  <text x="195" y="77" font-size="20" fill="#444">→</text>
+  <text x="193" y="63" font-size="11" fill="#444">$/\mathbb{Z}_2$</text>
+  <!-- Cone (half-plane drawn as wedge) -->
+  <path d="M 310 70 L 370 20 A 60 60 0 0 1 370 120 Z" fill="#e8ecf8" stroke="#1a1a6e" stroke-width="1.5"/>
+  <line x1="310" y1="70" x2="370" y2="70" stroke="#1a1a6e" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <path d="M 350 70 A 40 40 0 0 1 350 50" fill="none" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="358" y="65" font-size="12" fill="#888">$\pi$</text>
+  <text x="255" y="130" font-size="13" fill="#555">$\mathbb{R}^2/\mathbb{Z}_2$ (cone)</text>
+  <circle cx="310" cy="70" r="4" fill="#c0392b"/>
+  <text x="295" y="92" font-size="11" fill="#c0392b">tip</text>
+</svg>
+</div>
+<p class="caption">The $\mathbb{Z}_2$ quotient halves the angular range, producing a cone with deficit angle $\pi$.</p>
+
+<p>
+  In GR language, the <strong>deficit angle</strong> is $\Delta\phi = 2\pi - \pi = \pi$.
+  The curvature is everywhere zero except at the tip, where it is a delta function:
+</p>
+<div class="eq">
+$$R = 2\pi(1 - 1/2)\,\delta^{(2)}(r) = \pi\,\delta^{(2)}(r).$$
+</div>
+<p>
+  More generally, for a $\mathbb{Z}_N$ quotient with action $\theta \mapsto \theta + 2\pi/N$,
+  the deficit angle is $2\pi(1-1/N)$ and the cone has opening angle $2\pi/N$.
+</p>
+<div class="highlight">
+  <span class="key">Physical interpretation:</span>
+  The orbifold fixed point is a <em>conical singularity</em> — a genuine curvature singularity
+  from the GR perspective. In field theory, this means boundary conditions must be imposed there.
+  In string theory, this singularity is resolved by the <em>twisted sector</em> (see §9).
+</div>
+
+<p>
+  For $T^2/\mathbb{Z}_2$, there are <strong>four</strong> fixed points (see §4).
+  Each looks like $\mathbb{R}^2/\mathbb{Z}_2$ locally — a cone of deficit angle $\pi$.
+  The Euler characteristic receives contributions from these four conical singularities.
+</p>
+
+
+<!-- ============================================================ -->
+<h2 id="s4">4. The Torus Orbifold $T^2/\mathbb{Z}_2$: Fixed Points and Fundamental Domain</h2>
+
+<p>
+  This is the orbifold used repeatedly in arXiv:0806.4748. Start with the torus $T^2$ with coordinates
+  $(y_1, y_2) \sim (y_1+1, y_2) \sim (y_1, y_2+1)$ (unit-cell convention).
+  The $\mathbb{Z}_2$ acts as
+</p>
+<div class="eq">
+$$\mathbb{Z}_2:\quad (y_1, y_2) \mapsto (-y_1, -y_2).$$
+</div>
+<p>
+  This is a rotation by $\pi$ (the inversion). It is an isometry of $T^2$.
+  The <strong>fixed points</strong> are those satisfying $(y_1, y_2) \equiv (-y_1, -y_2) \pmod{\mathbb{Z}^2}$,
+  i.e., $2y_i \in \mathbb{Z}$. There are exactly four:
+</p>
+<div class="eq">
+$$(y_1, y_2) \in \left\{(0,0),\;\left(\tfrac{1}{2},0\right),\;\left(0,\tfrac{1}{2}\right),\;\left(\tfrac{1}{2},\tfrac{1}{2}\right)\right\}.$$
+</div>
+
+<!-- SVG: T^2/Z_2 fundamental domain -->
+<div style="text-align:center; margin: 28px 0;">
+<svg width="260" height="240" viewBox="-10 -10 260 240">
+  <!-- Torus unit cell -->
+  <rect x="0" y="0" width="200" height="200" fill="#e8ecf8" stroke="#1a1a6e" stroke-width="2"/>
+  <!-- Fundamental domain shading (lower-left triangle + adjustments — just shade half) -->
+  <polygon points="0,0 200,0 200,200 0,200" fill="#e8ecf8"/>
+  <!-- Mark fixed points -->
+  <circle cx="0"   cy="0"   r="6" fill="#c0392b"/>
+  <circle cx="100" cy="0"   r="6" fill="#c0392b"/>
+  <circle cx="0"   cy="100" r="6" fill="#c0392b"/>
+  <circle cx="100" cy="100" r="6" fill="#c0392b"/>
+  <!-- Labels -->
+  <text x="8"   y="20"  font-size="13" fill="#c0392b">(0,0)</text>
+  <text x="108" y="20"  font-size="13" fill="#c0392b">(½,0)</text>
+  <text x="8"   y="118" font-size="13" fill="#c0392b">(0,½)</text>
+  <text x="108" y="118" font-size="13" fill="#c0392b">(½,½)</text>
+  <!-- axis labels -->
+  <text x="90"  y="225" font-size="13" fill="#333">$y_1$</text>
+  <text x="-8"  y="108" font-size="13" fill="#333">$y_2$</text>
+  <text x="60"  y="165" font-size="14" fill="#555" font-style="italic">$T^2$</text>
+</svg>
+</div>
+<p class="caption">Unit cell of $T^2$. The four red dots are the $\mathbb{Z}_2$ fixed points. Each is a cone tip in the quotient $T^2/\mathbb{Z}_2$.</p>
+
+<p>
+  The quotient $T^2/\mathbb{Z}_2$ is topologically a <strong>sphere $S^2$</strong> — but with four conical
+  singularities of deficit angle $\pi$ at the four fixed points. This is a special case of a
+  "pillow" geometry: you can visualize it as folding the square torus in half diagonally.
+</p>
+
+<div class="box">
+  <span class="key">Fixed point counting for $T^{2n}/\mathbb{Z}_2$:</span>
+  On $T^{2n}$ with the inversion $(y_1,\ldots,y_{2n}) \mapsto -(y_1,\ldots,y_{2n})$,
+  there are $2^{2n}$ fixed points (each coordinate independently takes value $0$ or $\tfrac{1}{2}$).
+  For $T^6/\mathbb{Z}_2$: $2^6 = 64$ fixed points.
+</div>
+
+
+<!-- ============================================================ -->
+<h2 id="s5">5. Fields on an Orbifold: The Projection Condition</h2>
+
+<p>
+  When you place a quantum field on an orbifold $M/G$, you do not simply restrict its domain.
+  Instead, you keep the field on the covering space $M$ but impose that it transforms in a
+  <em>representation</em> of $G$:
+</p>
+<div class="eq">
+$$\phi(g \cdot y) = \rho(g)\,\phi(y) \quad \forall\, g \in G,$$
+</div>
+<p>
+  where $\rho: G \to \mathrm{GL}(V)$ is a representation of $G$ on the field's internal space $V$.
+  This is the <strong>orbifold projection condition</strong>.
+</p>
+
+<p>
+  For $G = \mathbb{Z}_2$ with generator $\theta$ (so $\theta^2 = 1$), only two representations exist:
+  the trivial representation $\rho(\theta) = +1$ and the sign representation $\rho(\theta) = -1$.
+  Accordingly, fields must be either <strong>even</strong> or <strong>odd</strong>:
+</p>
+<div class="eq">
+$$\phi(-y) = +\phi(y) \quad (\text{even, or ``$\mathbb{Z}_2$-parity $+$''}),$$
+$$\phi(-y) = -\phi(y) \quad (\text{odd, or ``$\mathbb{Z}_2$-parity $-$''}).$$
+</div>
+
+<p>
+  Different fields (or different components of the same field) can be assigned different parities.
+  This is a <em>choice</em> — it is data that specifies the orbifold model.
+  The key consequences are:
+</p>
+<ul>
+  <li>
+    <strong>Even fields</strong> have non-vanishing values at fixed points (boundary conditions are Neumann-like).
+    They can have zero modes — constant (massless) 4D modes.
+  </li>
+  <li>
+    <strong>Odd fields</strong> must <em>vanish</em> at every fixed point (boundary conditions are Dirichlet-like):
+    $\phi(y^*) = -\phi(y^*) \Rightarrow \phi(y^*) = 0$.
+    They have no zero mode.
+  </li>
+</ul>
+<div class="highlight">
+  <span class="key">This is the main tool of orbifold model building:</span>
+  by assigning opposite parities to unwanted fields, you can project them out of the massless spectrum entirely.
+  This is far more surgical than Higgs mechanisms or adding masses by hand.
+</div>
+
+<h3>5.1 &nbsp; A non-abelian example: the gauge field $A_\mu$ vs. $A_m$</h3>
+<p>
+  In a gauge theory on $\mathbb{R}^{3,1} \times T^2/\mathbb{Z}_2$, the gauge field $A_M$ has components
+  along the four uncompact directions ($A_\mu$) and along the compact directions ($A_m$, $m=4,5$).
+  Under $(y_4,y_5) \to (-y_4,-y_5)$, the components transform as:
+</p>
+<div class="eq">
+$$A_\mu(-y) = +A_\mu(y) \quad \text{(4-vector is even under spatial inversion)},$$
+$$A_m(-y) = -A_m(y) \quad \text{(compact-direction component flips sign)}.$$
+</div>
+<p>
+  This means $A_\mu$ has zero modes (it is the massless 4D gauge field),
+  while $A_m$ has no zero mode — the would-be massless scalar from $A_m$ is projected out.
+  This is the orbifold version of the Hosotani mechanism.
+</p>
+
+
+<!-- ============================================================ -->
+<h2 id="s6">6. Mode Expansion and the KK Spectrum on $S^1/\mathbb{Z}_2$</h2>
+
+<p>
+  The clearest demonstration of the orbifold projection is in the Kaluza-Klein decomposition.
+  On the circle $S^1$ with radius $R$, a scalar field $\phi(x,y)$ has KK expansion:
+</p>
+<div class="eq">
+$$\phi(x,y) = \sum_{n=-\infty}^{\infty} \phi_n(x)\,e^{iny/R}.$$
+</div>
+<p>
+  Under $y \to -y$ this becomes $\sum_n \phi_n(x) e^{-iny/R}$,
+  so the $\mathbb{Z}_2$ condition $\phi(-y) = \pm\phi(y)$ gives $\phi_{-n} = \pm\phi_n$.
+  Rewriting in terms of manifestly even/odd modes:
+</p>
+<div class="eq">
+$$\phi_+(x,y) = \phi_0(x) + \sum_{n=1}^{\infty} \phi_n(x)\,\cos\!\left(\frac{ny}{R}\right),$$
+$$\phi_-(x,y) = \sum_{n=1}^{\infty} \phi_n(x)\,\sin\!\left(\frac{ny}{R}\right).$$
+</div>
+<p>
+  The key observation:
+</p>
+<ul>
+  <li>The <strong>even field $\phi_+$</strong> has a <em>zero mode</em> ($n=0$): a massless 4D scalar.</li>
+  <li>The <strong>odd field $\phi_-$</strong> has <em>no zero mode</em>: all KK modes start at mass $m_n = n/R > 0$.</li>
+</ul>
+
+<table>
+  <tr><th>Mode</th><th>Profile $f(y)$</th><th>Mass</th><th>Value at $y=0$</th><th>Value at $y=\pi R$</th></tr>
+  <tr><td>$\phi_+,\; n=0$</td><td>$1$</td><td>$0$</td><td>$1$</td><td>$1$</td></tr>
+  <tr><td>$\phi_+,\; n=1,2,\ldots$</td><td>$\cos(ny/R)$</td><td>$n/R$</td><td>$1$</td><td>$(\pm 1)^n$</td></tr>
+  <tr><td>$\phi_-,\; n=1,2,\ldots$</td><td>$\sin(ny/R)$</td><td>$n/R$</td><td>$0$</td><td>$0$</td></tr>
+</table>
+<p class="caption">KK spectrum on $S^1/\mathbb{Z}_2$. The odd field vanishes at both fixed points (Dirichlet), the even field does not (Neumann).</p>
+
+<p>
+  This is exactly analogous to a scalar field on an interval $[0,\pi R]$ with either Neumann ($\partial_y \phi = 0$)
+  or Dirichlet ($\phi = 0$) boundary conditions at both endpoints.
+  <em>The orbifold boundary conditions are the higher-dimensional analogue of Dirichlet/Neumann BCs in field theory.</em>
+</p>
+
+<div class="box">
+  <span class="key">QFT analogy:</span>
+  If you have studied the Casimir effect or field theory on an interval,
+  you know that the choice of boundary conditions determines which modes exist.
+  The orbifold projection is precisely a choice of boundary conditions,
+  but now the "boundaries" are internal to the compact space.
+</div>
+
+
+<!-- ============================================================ -->
+<h2 id="s7">7. Spinors and the $\mathbb{Z}_2$ Action: Why There Is a Phase</h2>
+
+<p>
+  So far we treated scalar fields. For <strong>spinors</strong>, the $\mathbb{Z}_2$ action is more subtle.
+  A rotation by $2\pi$ in $SO(2)$ gives a phase $(-1)^{2s}$ for spin-$s$ fields. Since the $\mathbb{Z}_2$
+  inversion $(y_1,y_2) \to (-y_1,-y_2)$ is a rotation by $\pi$ in the $(y_1,y_2)$-plane,
+  it acts on a two-component spinor $\psi = (\psi_+, \psi_-)$ as:
+</p>
+<div class="eq">
+$$\psi(-y) = (-i)\,\tilde\Gamma^1\tilde\Gamma^2\,P\,\psi(y),$$
+</div>
+<p>
+  where $\tilde\Gamma^1\tilde\Gamma^2$ is the chirality matrix in the $T^2$ directions and $P = \pm 1$
+  is the additional parity assignment. Writing $-i\tilde\Gamma^1\tilde\Gamma^2 = \sigma_3 = \mathrm{diag}(+1,-1)$
+  for the standard 2D representation, the two chirality components transform as:
+</p>
+<div class="eq">
+$$\psi_+(-y) = +P\,\psi_+(y), \qquad \psi_-(-y) = -P\,\psi_-(y).$$
+</div>
+<p>
+  So if $P=+1$: $\psi_+$ is even and $\psi_-$ is odd.
+  If $P=-1$: $\psi_+$ is odd and $\psi_-$ is even.
+  In either case, the two chiralities have <em>opposite</em> parities — this is the mechanism
+  that gives chiral 4D fermions from a vector-like higher-dimensional theory.
+</p>
+
+<h3>7.1 &nbsp; The phase $(-i)$ and its origin</h3>
+<p>
+  The factor $-i$ comes from the spin representation of $SO(2)$.
+  Under a rotation by angle $\alpha$ in the $(y_1,y_2)$-plane, a Dirac spinor transforms as
+  $\psi \to e^{i\alpha\tilde\Gamma^1\tilde\Gamma^2/2}\psi$.
+  For $\alpha = \pi$ (a $\mathbb{Z}_2$ rotation by $\pi$):
+</p>
+<div class="eq">
+$$e^{i\frac{\pi}{2}\tilde\Gamma^1\tilde\Gamma^2} = \cos\!\frac{\pi}{2} + i\sin\!\frac{\pi}{2}\,\tilde\Gamma^1\tilde\Gamma^2
+= i\tilde\Gamma^1\tilde\Gamma^2.$$
+</div>
+<p>
+  Up to the overall sign convention, this gives the factor in the boundary condition above.
+  The point is: <em>spinors pick up a phase under the $\mathbb{Z}_2$ even before the assignment $P$</em>.
+  The physical content is that you cannot assign a spinor field as purely "even" or "odd" —
+  the two chirality components are locked into opposite parities by the spin structure.
+  This is how the orbifold generates chirality.
+</p>
+
+<div class="warning">
+  <span class="key">Key subtlety — the integer $n$ in the paper:</span>
+  In arXiv:0806.4748, the full $\mathbb{Z}_2$ boundary condition for the spinor is
+  $\psi(-y) = (-i)\tilde\Gamma^4\tilde\Gamma^5\, P\,\psi(y)$,
+  where $P$ is an additional operator acting on gauge-space indices.
+  For a $U(1)$ field of charge $q$, the paper writes $P = (-1)^{q+n}$ with $n$ an integer —
+  both the charge and the free integer choice contribute.
+  Without magnetic flux, this projection halves the zero-mode count.
+  With magnetic flux, the projection mixes the $M$ torus modes and can yield odd-parity zero-modes
+  not present in the pure orbifold. For what $P$ is and why it must appear, see §7.2 below.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="s72">7.2 &nbsp; The Gauge Embedding $P$: What It Is and Why It Must Exist</h2>
+
+<h3>7.2.1 &nbsp; The problem: an orbifold identification acts on a gauge bundle</h3>
+<p>
+  When you identify $y \sim -y$ on the torus, you are identifying <em>points in spacetime</em>.
+  But a gauge theory lives on a principal bundle over spacetime — at every point there is a copy
+  of the gauge group. When you identify two points, you must also specify how their gauge fibres
+  are identified. This identification is an element of the gauge group: it is exactly the operator $P$.
+</p>
+<p>
+  More concretely: the orbifold boundary condition for a gauge field is not simply $A_\mu(-y) = A_\mu(y)$.
+  In general it can be
+</p>
+<div class="eq">
+$$A_\mu(x,-y) = P\, A_\mu(x,y)\, P^{-1},$$
+</div>
+<p>
+  where $P$ is a (possibly position-independent) gauge transformation evaluated at the fixed point.
+  This is a <em>large</em> gauge transformation — it cannot be continuously deformed to the identity.
+  Applying the orbifold twist twice must give the identity, so $P$ must satisfy
+</p>
+<div class="eq">
+$$P^2 = \mathbf{1}.$$
+</div>
+<p>
+  This is the only constraint from consistency. The choice of $P$ is <strong>not</strong> fixed by
+  the geometry — it is free additional data that defines the orbifold model.
+  Different choices of $P$ give physically inequivalent theories with different spectra
+  and different gauge groups in 4D.
+</p>
+
+<div class="box">
+  <span class="key">Analogy from GR / geometry:</span>
+  In Kaluza-Klein theory, when you compactify on $S^1$ you can turn on a Wilson line
+  $A = \theta\,dy$ — a flat gauge field with non-trivial holonomy.
+  The orbifold projection matrix $P$ is the discrete analogue: it is the holonomy
+  of the gauge connection around the orbifold fixed point.
+  Because the fixed point is not a contractible loop, this holonomy is physical and
+  cannot be gauged away.
+</div>
+
+<h3>7.2.2 &nbsp; The $U(1)$ case: why $P = (-1)^{q+n}$</h3>
+<p>
+  For a $U(1)$ gauge theory, the gauge group is $\mathrm{U}(1) \ni e^{i\alpha}$.
+  The condition $P^2 = 1$ restricts $P$ to be a square root of unity in $U(1)$:
+  $P = e^{i\pi k} = (-1)^k$ for some integer $k$.
+  So $P = +1$ or $P = -1$ — there are only two inequivalent choices.
+</p>
+<p>
+  A field of $U(1)$ charge $q$ transforms under the gauge transformation $P$ as
+</p>
+<div class="eq">
+$$\psi \;\to\; P^q\,\psi = (-1)^{qk}\,\psi.$$
+</div>
+<p>
+  The paper parametrises this as $P = (-1)^{q+n}$ where $n$ is a free integer,
+  absorbing the charge factor and the choice of $k$ into a single integer.
+  Since $P^2 = (-1)^{2(q+n)} = 1$ automatically (because $2(q+n)$ is always even), the constraint is satisfied.
+  The different values of $n \pmod{2}$ label the two inequivalent theories.
+</p>
+
+<h3>7.2.3 &nbsp; The $U(N)$ case: $P$ as a matrix in gauge space</h3>
+<p>
+  For $U(N)$ gauge theory with the magnetic flux block-diagonal as
+  $F_{45} = 2\pi\,\mathrm{diag}(M_1\mathbf{1}_{N_1},\ldots,M_n\mathbf{1}_{N_n})$,
+  the unbroken gauge group is $\prod_a U(N_a)$.
+  The orbifold identification $(y_4,y_5) \to -(y_4,y_5)$ must be embedded into this gauge group,
+  so $P$ is now an $N\times N$ matrix satisfying $P^2 = \mathbf{1}$.
+  Its eigenvalues are $\pm 1$, and it has the block structure
+</p>
+<div class="eq">
+$$P = \mathrm{diag}(\eta_1\mathbf{1}_{N_1},\;\eta_2\mathbf{1}_{N_2},\;\ldots,\;\eta_n\mathbf{1}_{N_n}),
+\qquad \eta_a = \pm 1.$$
+</div>
+<p>
+  (The paper restricts to this block-diagonal form to preserve the unbroken $\prod_a U(N_a)$ gauge group.
+  A general $P$ with off-diagonal structure would break the gauge group further.)
+  The boundary conditions for the gauge field and gaugino become:
+</p>
+<div class="eq">
+$$A_\mu(x,-y) = P\,A_\mu(x,y)\,P^{-1}, \qquad
+A_m(x,-y) = -P\,A_m(x,y)\,P^{-1},$$
+$$\lambda_\pm(x,-y) = \pm\,P\,\lambda_\pm(x,y)\,P^{-1}.$$
+</div>
+
+<h3>7.2.4 &nbsp; How $P$ acts on bi-fundamental matter</h3>
+<p>
+  This is the key to understanding the generation-counting.
+  The bi-fundamental gaugino $\lambda^{ab}$ lives in the off-diagonal block between the $a$ and $b$ stacks.
+  Under conjugation by $P$:
+</p>
+<div class="eq">
+$$P\,\lambda^{ab}\,P^{-1} = \eta_a\,\lambda^{ab}\,\eta_b^{-1} = \eta_a\eta_b\,\lambda^{ab}.$$
+</div>
+<p>
+  So the orbifold boundary condition for $\lambda^{ab}_+$ becomes:
+</p>
+<div class="eq">
+$$\lambda^{ab}_+(x,-y) = +\,\eta_a\eta_b\,\lambda^{ab}_+(x,y).$$
+</div>
+<p>
+  There are two cases:
+</p>
+<ul>
+  <li>
+    <strong>$\eta_a\eta_b = +1$ (same sign):</strong>
+    $\lambda^{ab}_+(-y) = +\lambda^{ab}_+(y)$ — the field is <em>even</em>.
+    Only even-parity theta functions $\Theta^j_\mathrm{even}$ survive on each $T^2$.
+  </li>
+  <li>
+    <strong>$\eta_a\eta_b = -1$ (opposite sign):</strong>
+    $\lambda^{ab}_+(-y) = -\lambda^{ab}_+(y)$ — the field is <em>odd</em>.
+    Only odd-parity theta functions $\Theta^j_\mathrm{odd}$ survive.
+  </li>
+</ul>
+<p>
+  The sign $\eta_a\eta_b$ is entirely determined by the relative sign between the $a$- and $b$-blocks
+  in $P$. Since the two chiralities $\lambda^{ab}_\pm$ have opposite boundary conditions
+  (from the $\pm$ in $\lambda_\pm \to \pm P\lambda_\pm P^{-1}$),
+  only one chirality will have even-parity wave functions and the other will have odd-parity ones.
+  This is the mechanism that selects which theta functions survive and thus determines the generation count.
+</p>
+
+<div class="highlight">
+  <span class="key">Summary of the role of $P$:</span>
+  <ul style="margin-top:8px;">
+    <li>$P$ is the <strong>gauge embedding</strong> of the orbifold twist — it specifies how the geometric identification acts on the gauge bundle.</li>
+    <li>It is free data: $P^2 = \mathbf{1}$ is the only constraint. Different choices give different physical theories.</li>
+    <li>For $U(1)$: $P = \pm 1$ (two choices, labelled by integer $n$ in the paper via $P = (-1)^{q+n}$).</li>
+    <li>For $U(N)$: $P$ is a diagonal $\pm 1$ matrix. The relative signs $\eta_a\eta_b$ determine whether bi-fundamental fields are even or odd, hence which theta functions survive the projection.</li>
+    <li>The full boundary condition $\psi(-y) = (-i)\tilde\Gamma^4\tilde\Gamma^5\,P\,\psi(y)$ factorises into two independent pieces: the <em>geometric</em> factor $(-i)\tilde\Gamma^4\tilde\Gamma^5$ (acting on spinor indices, fixed by the spin representation) and the <em>gauge</em> factor $P$ (acting on gauge indices, a free choice).</li>
+  </ul>
+</div>
+
+<h3>7.2.5 &nbsp; Explicit example from arXiv:0806.4748 (Model 1)</h3>
+<p>
+  For the Pati-Salam model with $N_a=4, N_b=2, N_c=2$, the paper chooses
+</p>
+<div class="eq">
+$$P = P' = \mathrm{diag}(\underbrace{+1,\ldots,+1}_{N_a=4},\;
+\underbrace{-1,\ldots,-1}_{N_b=2},\;
+\underbrace{+1,\ldots,+1}_{N_c=2}).$$
+</div>
+<p>
+  The relative signs are: $\eta_a = +1$, $\eta_b = -1$, $\eta_c = +1$.
+  Therefore:
+</p>
+<ul>
+  <li>$\eta_a\eta_b = -1$: $\lambda^{ab}$ is <em>odd</em> under the orbifold — only $\Theta^j_\mathrm{odd}$ survive on each projected $T^2$.</li>
+  <li>$\eta_c\eta_a = +1$: $\lambda^{ca}$ is <em>even</em> — only $\Theta^j_\mathrm{even}$ survive.</li>
+  <li>$\eta_b\eta_c = -1$: $\lambda^{bc}$ (Higgs) is <em>odd</em>.</li>
+</ul>
+<p>
+  Combined with the flux quantum numbers $(I^1_{ab}, I^2_{ab}, I^3_{ab}) = (3,4,1)$,
+  the zero-mode count after projection follows the even/odd table:
+  flux $3$ has 1 odd mode, flux $4$ has 2 even modes, flux $1$ has 0 odd modes.
+  Since $\lambda^{ab}$ is odd, the surviving count per $T^2$ is $(1,\,I^2_{ab(\mathrm{even})},\,0)$.
+  Wait — but $\lambda^{ab}$ is odd on each $T^2$ separately only when $P$ acts on that $T^2$.
+  For Model 1 with $P = P' = \mathrm{diag}(\mathbf{1}_4,-\mathbf{1}_2,\mathbf{1}_2)$,
+  the $\mathbb{Z}_2$ acts on $T^2_{(1)}$ and $T^2_{(2)}$ simultaneously (see §10.1).
+  The $Z_2$ boundary condition involves the product of chiralities $s_1 s_2$:
+  $\lambda^{ab}_{s_1,s_2,s_3}(-y_{1,2}) = s_1 s_2\,\eta_a\eta_b\,\lambda^{ab}_{s_1,s_2,s_3}(y)$.
+  For the zero-mode sector $s_1=s_2=+1$, this gives eigenvalue $\eta_a\eta_b = -1$,
+  so the surviving modes need $\Theta^{j_1}_\mathrm{odd}(T^2_{(1)})\,\Theta^{j_2}_\mathrm{odd}(T^2_{(2)})$
+  or $\Theta^{j_1}_\mathrm{even}\,\Theta^{j_2}_\mathrm{even}$.
+  After applying both $Z_2$ and $Z'_2$ (see §10), only one combination is consistent.
+  The net result: $1\times 3\times 1 = 3$ families (as shown in the companion explanation file).
+</p>
+
+<!-- ============================================================ -->
+<h2 id="s8">8. Why Orbifolds Break Supersymmetry</h2>
+
+<p>
+  Orbifolds are one of the most efficient tools for breaking extended supersymmetry.
+  The logic is straightforward and follows directly from the projection:
+</p>
+
+<p>
+  Consider starting from 10D $\mathcal{N}=1$ super Yang-Mills, compactified on $T^6$.
+  The 4D theory has $\mathcal{N}=4$ supersymmetry — far too much for realistic model building.
+  The supercharges transform as spinors under the $SO(6) \cong SU(4)$ rotation group of $T^6$.
+  Under the $\mathbb{Z}_2 \times \mathbb{Z}'_2$ orbifold action (two $\mathbb{Z}_2$ rotations in different planes),
+  only a subset of supercharges is even under the projection.
+</p>
+
+<p>
+  Concretely, the four complex supercharges $Q_\alpha$ of the $\mathcal{N}=4$ theory decompose under
+  the orbifold group. Each $\mathbb{Z}_2$ acting on two of the three $T^2$ factors flips the sign of
+  two of the four supercharges. Only supercharges that are even under <em>all</em> elements of the orbifold group survive.
+  For $\mathbb{Z}_2 \times \mathbb{Z}'_2$:
+</p>
+
+<table>
+  <tr><th>Supercharge</th><th>$\mathbb{Z}_2$ eigenvalue</th><th>$\mathbb{Z}'_2$ eigenvalue</th><th>Survives?</th></tr>
+  <tr><td>$Q_1$</td><td>$+1$</td><td>$+1$</td><td>Yes</td></tr>
+  <tr><td>$Q_2$</td><td>$-1$</td><td>$-1$</td><td>Yes</td></tr>
+  <tr><td>$Q_3$</td><td>$-1$</td><td>$+1$</td><td>No</td></tr>
+  <tr><td>$Q_4$</td><td>$+1$</td><td>$-1$</td><td>No</td></tr>
+</table>
+<p class="caption">Schematic: the $\mathbb{Z}_2\times\mathbb{Z}'_2$ orbifold retains 2 of 4 supercharges, breaking $\mathcal{N}=4 \to \mathcal{N}=2$ (or to $\mathcal{N}=1$ with further conditions).</p>
+
+<p>
+  Precisely: the $T^6/(\mathbb{Z}_2\times\mathbb{Z}'_2)$ orbifold in arXiv:0806.4748 preserves
+  <strong>$\mathcal{N}=1$ in 4D</strong> — it breaks the original $\mathcal{N}=4$ by a factor of 4.
+  This is one of the two most common orbifold compactifications for realistic model building
+  (the other being $T^6/\mathbb{Z}_3$, which also preserves $\mathcal{N}=1$).
+</p>
+<div class="highlight">
+  <span class="key">The SUSY-breaking mechanism in brief:</span>
+  The supercharges $Q$ are spinors in the compact dimensions. The orbifold group acts on them,
+  and only supercharges that are invariant (i.e., even under the action) survive to 4D as symmetries.
+  The orbifold is like a "projection operator" on the SUSY algebra — it is discrete, exact, and under full analytic control.
+</div>
+
+
+<!-- ============================================================ -->
+<h2 id="s9">9. Twisted Sectors in String Theory</h2>
+
+<p>
+  Everything above applies to field theory on orbifold backgrounds.
+  In <strong>string theory</strong>, there is an entirely new ingredient with no field-theory counterpart:
+  the <em>twisted sectors</em>.
+</p>
+
+<h3>9.1 &nbsp; Closed strings on orbifolds</h3>
+<p>
+  A closed string satisfies the periodicity condition $X^\mu(\sigma + 2\pi) = X^\mu(\sigma)$
+  (up to winding on the torus). On the orbifold $M/G$, we must allow <em>twisted boundary conditions</em>:
+  the string can close up to a group element $g \in G$,
+</p>
+<div class="eq">
+$$X^m(\sigma + 2\pi) = g \cdot X^m(\sigma),$$
+</div>
+<p>
+  because the two ends of the closed string are identified under $g$ in the orbifold.
+  For each group element $g \in G$ (including $g=e$, the untwisted sector), there is a distinct
+  sector of the string Hilbert space.
+</p>
+
+<h3>9.2 &nbsp; The $\mathbb{Z}_2$ twisted sector: a simple example</h3>
+<p>
+  On $S^1/\mathbb{Z}_2$ with the action $y \to -y$, the twisted sector has the boundary condition
+</p>
+<div class="eq">
+$$X(\sigma + 2\pi) = -X(\sigma).$$
+</div>
+<p>
+  Expanding in modes, this requires <em>half-integer</em> moding:
+</p>
+<div class="eq">
+$$X(\sigma,\tau) = x_0 + \sum_{r \in \mathbb{Z}+\frac{1}{2}} \left(\alpha_r e^{-ir(\tau-\sigma)} + \bar\alpha_r e^{-ir(\tau+\sigma)}\right).$$
+</div>
+<p>
+  The key point: the twisted sector has no zero mode $x_0$ — the string is <em>stuck</em> at a fixed point.
+  The ground state of the twisted sector is a particle <strong>localized at the orbifold fixed point</strong>.
+</p>
+
+<div class="box">
+  <span class="key">Twisted sector = new particles localized at singularities:</span>
+  The orbifold fixed points appear as singular conical singularities from the spacetime perspective.
+  But string theory automatically "fills in" these singularities: the twisted sector states
+  are new massless (or light) particles living exactly at the fixed points.
+  They are not visible in the low-energy field theory of the untwisted sector — they are
+  intrinsically stringy states that appear because strings can wrap around the cone tip.
+</div>
+
+<h3>9.3 &nbsp; The orbifold projection on closed strings</h3>
+<p>
+  To form a consistent theory on the orbifold, one also imposes the <em>orbifold projection</em>
+  on the Hilbert space: only states invariant under $G$ are kept.
+  In the untwisted sector, this discards states odd under $G$ (as in field theory).
+  In each twisted sector, this further selects a subset of twisted states.
+  The full orbifold string theory is:
+</p>
+<div class="eq">
+$$\mathcal{H}_{\text{orbifold}} = \frac{1}{|G|}\sum_{g,h\in G} \mathcal{H}_{g,h},$$
+</div>
+<p>
+  where $\mathcal{H}_{g,h}$ denotes the sector of strings with $g$-twisted boundary conditions
+  projected onto the $h$-invariant subspace (modular invariance requires summing over both).
+</p>
+
+<h3>9.4 &nbsp; Why twisted sectors are needed for consistency</h3>
+<p>
+  The orbifold projection alone (dropping the twisted sectors) gives a modular-<em>non</em>-invariant
+  theory. Modular invariance of the partition function — the string-theory analogue of UV finiteness
+  and anomaly cancellation — requires the twisted sectors to be present.
+  Including them, the partition function automatically satisfies:
+</p>
+<div class="eq">
+$$Z\!\left(\tau+1\right) = Z(\tau), \qquad Z\!\left(-1/\tau\right) = Z(\tau),$$
+</div>
+<p>
+  which are the two generators of modular transformations $SL(2,\mathbb{Z})$ acting on the torus worldsheet.
+  This is a deep consistency condition of string theory with no direct analogue in field theory.
+</p>
+
+
+<!-- ============================================================ -->
+<h2 id="s10">10. The Full Orbifold $T^6/(\mathbb{Z}_2\times\mathbb{Z}'_2)$ in Model Building</h2>
+
+<p>
+  Let us now put everything together and describe the orbifold used in arXiv:0806.4748.
+  The setup is $\mathcal{N}=1$ SYM in 10D (from the open-string sector of a type IIB or type I theory,
+  or a heterotic theory), compactified on $T^6/(\mathbb{Z}_2\times\mathbb{Z}'_2)$.
+</p>
+
+<h3>10.1 &nbsp; The two $\mathbb{Z}_2$ actions</h3>
+<p>
+  Label the coordinates of $T^6 = T^2_{(1)} \times T^2_{(2)} \times T^2_{(3)}$ as
+  $(y_4,y_5)$, $(y_6,y_7)$, $(y_8,y_9)$.
+  The two group elements act as:
+</p>
+<div class="eq">
+$$\mathbb{Z}_2:\quad (y_4,y_5) \to -(y_4,y_5),\quad (y_6,y_7) \to -(y_6,y_7),\quad (y_8,y_9) \to +(y_8,y_9),$$
+$$\mathbb{Z}'_2:\quad (y_4,y_5) \to -(y_4,y_5),\quad (y_6,y_7) \to +(y_6,y_7),\quad (y_8,y_9) \to -(y_8,y_9).$$
+</div>
+<p>
+  Their product $\mathbb{Z}_2 \cdot \mathbb{Z}'_2$ acts as $(y_4,y_5) \to +(y_4,y_5)$, $(y_6,y_7) \to -(y_6,y_7)$,
+  $(y_8,y_9) \to -(y_8,y_9)$.
+  Thus the full orbifold group $G = \{e,\,\theta,\,\theta',\,\theta\theta'\} \cong \mathbb{Z}_2 \times \mathbb{Z}'_2$
+  acts simultaneously on all three $T^2$ factors.
+</p>
+
+<h3>10.2 &nbsp; Fixed loci and twisted sectors</h3>
+<p>
+  For each non-trivial group element, the fixed locus is a product of fixed sets on each $T^2$:
+</p>
+<ul>
+  <li>
+    Under $\theta$: fixed on $T^2_{(1)}$ and $T^2_{(2)}$ (4 points each), free on $T^2_{(3)}$.
+    Fixed locus: $4\times 4 = 16$ fixed points $\times T^2_{(3)}$ = 16 two-tori.
+  </li>
+  <li>
+    Under $\theta'$: analogously, 16 two-tori.
+  </li>
+  <li>
+    Under $\theta\theta'$: 16 two-tori (on $T^2_{(2)}\times T^2_{(3)}$, free on $T^2_{(1)}$).
+  </li>
+</ul>
+<p>
+  Each fixed torus carries twisted-sector states — these are D6-branes (in the T-dual intersecting brane picture)
+  or lower-dimensional brane modes in the direct magnetized-orbifold description.
+  In arXiv:0806.4748, these are called <strong>brane modes</strong>: they are localized fields that
+  live on the orbifold fixed loci and can only couple to bulk zero-modes with
+  <em>even</em> wave functions (since odd profiles vanish at the fixed points).
+</p>
+
+<h3>10.3 &nbsp; The combined effect: generation counting</h3>
+<p>
+  On the pure torus $T^6$, the bi-fundamental matter between D-brane stacks $a$ and $b$
+  has $I_{ab} = \prod_{i=1}^3 (M^{(i)}_a - M^{(i)}_b)$ zero-modes (families).
+  After the $\mathbb{Z}_2\times\mathbb{Z}'_2$ orbifold:
+</p>
+<ul>
+  <li>
+    Each $T^2_{(i)}$ contributes either even or odd zero-modes, depending on the projection.
+    On $T^2_{(i)}$ alone, the $|M^{(i)}|$ torus zero-modes split into
+    $\lceil |M^{(i)}|/2 \rceil$ even modes and $\lfloor |M^{(i)}|/2 \rfloor$ odd modes.
+  </li>
+  <li>
+    Consistency of the two $\mathbb{Z}_2$ projections requires the surviving modes to be either
+    all-even or all-odd products across the three $T^2$ factors.
+  </li>
+  <li>
+    The total family count is therefore much smaller than $|I_{ab}|$, and can be as low as 3.
+  </li>
+</ul>
+
+<div class="summary-chain">
+  <strong>Why this is powerful:</strong>
+  On the torus alone, achieving exactly 3 families requires $\prod_i |M^{(i)}_a - M^{(i)}_b| = 3$,
+  which severely constrains the flux choices. On the orbifold, one can start with, say,
+  $|I_{ab}| = 12$ families on the torus and have the orbifold reduce this to 3 by projecting out 3/4 of the modes.
+  This gives far more freedom in satisfying supersymmetry conditions and tadpole cancellation,
+  while still achieving the observed three-generation structure.
+</div>
+
+
+<!-- ============================================================ -->
+<h2 id="s11">11. Summary: The Orbifold as a Tool</h2>
+
+<div class="summary-chain">
+  <ol>
+    <li>
+      <strong>Definition:</strong>
+      An orbifold $M/G$ is the quotient of a smooth manifold $M$ by a discrete group $G$
+      acting by isometries. Fixed points (where some $g\in G$ acts trivially) are conical singularities.
+    </li>
+    <li>
+      <strong>Boundary conditions for fields:</strong>
+      Fields on $M/G$ must transform in representations of $G$.
+      For $\mathbb{Z}_2$: fields are either even ($P=+1$) or odd ($P=-1$).
+      Odd fields vanish at fixed points and have no zero mode.
+    </li>
+    <li>
+      <strong>KK reduction:</strong>
+      On $S^1/\mathbb{Z}_2$: even KK modes are $\cos(ny/R)$ (including the $n=0$ zero mode),
+      odd modes are $\sin(ny/R)$ (no zero mode).
+      The zero-mode spectrum is halved compared to $S^1$.
+    </li>
+    <li>
+      <strong>Spinors:</strong>
+      The $\mathbb{Z}_2$ rotation by $\pi$ in a 2-plane acts on spinors with an extra sign from the
+      spin representation: the two chirality components have opposite parities.
+      This is the mechanism generating 4D chirality from a vector-like higher-dimensional theory.
+    </li>
+    <li>
+      <strong>SUSY breaking:</strong>
+      Supercharges are spinors in the compact space. The orbifold projects out those with the wrong
+      parity, reducing $\mathcal{N}=4 \to \mathcal{N}=1$ for $T^6/(\mathbb{Z}_2\times\mathbb{Z}'_2)$.
+    </li>
+    <li>
+      <strong>Twisted sectors (string theory):</strong>
+      Strings can wind around orbifold fixed points with twisted boundary conditions.
+      These new states are localized at the fixed points, are required for modular invariance,
+      and resolve the conical singularities of the orbifold. They have no field-theory analogue.
+    </li>
+    <li>
+      <strong>Model building:</strong>
+      The orbifold projection reduces the generation number, projects out unwanted massless fields,
+      breaks extended supersymmetry, and can enforce texture zeroes in Yukawa matrices —
+      all in a geometrically transparent and exactly controllable way.
+    </li>
+  </ol>
+</div>
+
+<hr>
+<p class="ref">
+  Companion file: <em>explanation_magnetized_orbifold.html</em> (arXiv:0806.4748 in detail).<br>
+  Standard references: Dixon, Harvey, Vafa, Witten (1985, 1986); Bailin &amp; Love, "Orbifold compactifications of string theory" (Phys. Rept. 315, 1999).
+</p>
+
+</body>
+</html>

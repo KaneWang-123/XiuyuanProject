@@ -8,9 +8,9 @@ A personal repository for reading and annotating theoretical high-energy physics
 
 | Folder / File | arXiv ID | Title | Topic |
 |---|---|---|---|
-| `arXiv-2409.05270v1/` | [2409.05270](https://arxiv.org/abs/2409.05270) | *Yukawa textures from non-invertible symmetries* | Kobayashi, Otsuka, Tanimoto — non-invertible symmetries from $\mathbb{Z}_M$ + gauged $\mathbb{Z}_2$; NNI texture |
-| `Non-Invertible Peccei-Quinn.../` | [2402.12453](https://arxiv.org/abs/2402.12453) | *Non-Invertible Peccei-Quinn Symmetry and the Massless Quark Solution to the Strong CP Problem* | Córdova, Hong, Koren — non-invertible PQ symmetry, $SU(9)$ color-flavor unification, strong CP |
-| `arXiv-0806.4748v2` | [0806.4748](https://arxiv.org/abs/0806.4748) | *Magnetized orbifold models* | Abe, Kobayashi, Ohki — zero-modes on $T^6/(\mathbb{Z}_2\times\mathbb{Z}'_2)$ with magnetic fluxes, three-family models |
+| `Yukawa textures from non-invertible symmetries/` | [2409.05270](https://arxiv.org/abs/2409.05270) | *Yukawa textures from non-invertible symmetries* | Kobayashi, Otsuka, Tanimoto — non-invertible symmetries from $\mathbb{Z}_M$ + gauged $\mathbb{Z}_2$; NNI texture |
+| `Non-Invertible Peccei-Quinn Symmetry and the Massless Quark Solution to the Strong CP Problem/` | [2402.12453](https://arxiv.org/abs/2402.12453) | *Non-Invertible Peccei-Quinn Symmetry and the Massless Quark Solution to the Strong CP Problem* | Córdova, Hong, Koren — non-invertible PQ symmetry, $SU(9)$ color-flavor unification, strong CP |
+| `Magnetized orbifold models` | [0806.4748](https://arxiv.org/abs/0806.4748) | *Magnetized orbifold models* | Abe, Kobayashi, Ohki — zero-modes on $T^6/(\mathbb{Z}_2\times\mathbb{Z}'_2)$ with magnetic fluxes, three-family models |
 
 ### Explanations
 

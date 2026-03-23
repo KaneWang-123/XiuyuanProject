@@ -10,7 +10,7 @@ This is a theoretical physics paper reading and research repository. It contains
 
 ### Paper storage
 - Papers are stored as folders named by their arXiv ID (e.g., `arXiv-2402.12453v1`) until read, after which the folder is renamed to the paper's title.
-- Some papers arrive as a single `.tex` file with no folder (e.g., `arXiv-0806.4748v2`).
+- Some papers arrive as a single `.tex` file with no folder; once read, the file is also renamed to the paper's title (e.g., `Magnetized orbifold models`).
 - The main tex file is typically named `draft.tex` or `draft_arXiv.tex`.
 
 ### Reading papers
@@ -26,6 +26,6 @@ This is a theoretical physics paper reading and research repository. It contains
 
 | Folder / File | Title | Topic |
 |---|---|---|
-| `arXiv-2409.05270v1/` | *Yukawa textures from non-invertible symmetries* | Non-invertible symmetries → Yukawa textures for quarks/leptons; NNI texture from $\mathbb{Z}_M$ + gauged $\mathbb{Z}_2$ |
-| `Non-Invertible Peccei-Quinn Symmetry.../` | *Non-Invertible Peccei-Quinn Symmetry and the Massless Quark Solution to the Strong CP Problem* | Non-invertible PQ symmetry from fractional instantons in $(SU(3)_C \times U(1)_H)/\mathbb{Z}_3$; $SU(9)$ color-flavor unification; strong CP solution |
-| `arXiv-0806.4748v2` | *Magnetized orbifold models* | Magnetized D-brane compactifications on orbifolds |
+| `Yukawa textures from non-invertible symmetries/` | *Yukawa textures from non-invertible symmetries* | Non-invertible symmetries → Yukawa textures for quarks/leptons; NNI texture from $\mathbb{Z}_M$ + gauged $\mathbb{Z}_2$ |
+| `Non-Invertible Peccei-Quinn Symmetry and the Massless Quark Solution to the Strong CP Problem/` | *Non-Invertible Peccei-Quinn Symmetry and the Massless Quark Solution to the Strong CP Problem* | Non-invertible PQ symmetry from fractional instantons in $(SU(3)_C \times U(1)_H)/\mathbb{Z}_3$; $SU(9)$ color-flavor unification; strong CP solution |
+| `Magnetized orbifold models` | *Magnetized orbifold models* | Magnetized D-brane compactifications on orbifolds |

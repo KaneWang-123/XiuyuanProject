@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Fermions Pick Up a Phase Under the Orbifold Z_2</title>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+    body {
+      font-family: "Georgia", serif;
+      max-width: 920px;
+      margin: 60px auto;
+      padding: 0 32px;
+      line-height: 1.85;
+      color: #1a1a1a;
+      background: #fafafa;
+    }
+    h1 { font-size: 1.65em; border-bottom: 2px solid #444; padding-bottom: 10px; }
+    h2 { font-size: 1.25em; color: #1a1a6e; margin-top: 48px; border-left: 4px solid #1a1a6e; padding-left: 12px; }
+    h3 { font-size: 1.05em; color: #333; margin-top: 30px; }
+    .meta { font-style: italic; color: #555; margin-bottom: 34px; }
+    .box {
+      background: #fff;
+      border-left: 4px solid #1a1a6e;
+      padding: 14px 20px;
+      margin: 22px 0;
+      border-radius: 0 6px 6px 0;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+    .highlight {
+      background: #f0f4ff;
+      border: 1px solid #b0bcee;
+      padding: 16px 20px;
+      border-radius: 6px;
+      margin: 22px 0;
+    }
+    .warning {
+      background: #fff8e6;
+      border: 1px solid #e8c84a;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 22px 0;
+    }
+    .red {
+      background: #fff0f0;
+      border: 1px solid #e8a0a0;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 22px 0;
+    }
+    .key { font-weight: bold; color: #1a1a6e; }
+    .eq { margin: 18px 0; overflow-x: auto; }
+    .caption { text-align: center; font-size: 0.88em; color: #555; font-style: italic; margin-top: -8px; margin-bottom: 20px; }
+    table { border-collapse: collapse; margin: 20px auto; font-size: 0.93em; }
+    th, td { border: 1px solid #bbb; padding: 7px 16px; text-align: center; }
+    th { background: #e8ecf8; }
+    hr { border: none; border-top: 1px solid #ddd; margin: 44px 0; }
+    .ref { font-size: 0.85em; color: #555; font-style: italic; }
+    .summary-chain {
+      background: #fffbe6;
+      border: 1px solid #e6d87a;
+      padding: 18px 24px;
+      border-radius: 6px;
+      margin: 30px 0;
+    }
+    .toc { background: #f4f4f4; padding: 18px 24px; border-radius: 6px; margin-bottom: 40px; }
+    .toc ol { margin: 0; padding-left: 22px; }
+    .toc li { margin: 4px 0; }
+    .toc a { color: #1a1a6e; text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<h1>Why Fermions Pick Up a Phase Under the Orbifold $\mathbb{Z}_2$</h1>
+<p class="meta">
+  A detailed derivation from first principles: the spin double cover, Clifford algebra,
+  and why the $\mathbb{Z}_2$ orbifold forces chirality on fermions.
+  Supplement to <em>explanation_orbifold.html</em>.
+</p>
+
+<div class="toc">
+  <strong>Contents</strong>
+  <ol>
+    <li><a href="#s1">The Core Question</a></li>
+    <li><a href="#s2">Step 1 — Rotations Act Differently on Different Spins</a></li>
+    <li><a href="#s3">Step 2 — Why Spin(2) Is a Double Cover of SO(2)</a></li>
+    <li><a href="#s4">Step 3 — The Z_2 Orbifold Element Has Order 4 in Spin(2)</a></li>
+    <li><a href="#s5">Step 4 — The Clifford Algebra Calculation</a></li>
+    <li><a href="#s6">Step 5 — Putting It Together: The Boundary Condition</a></li>
+    <li><a href="#s7">Step 6 — Why This Forces Chirality</a></li>
+    <li><a href="#s8">Consistency Check: Scalars vs Spinors</a></li>
+    <li><a href="#s85">Why the Inversion Is a Rotation on Any Torus</a></li>
+    <li><a href="#s9">The Deeper Picture: Spin Structures on Orbifolds</a></li>
+  </ol>
+</div>
+
+
+<!-- ============================================================ -->
+<h2 id="s1">1. The Core Question</h2>
+
+<p>
+  For a scalar field $\phi$ on $S^1/\mathbb{Z}_2$, the orbifold condition is simply
+  $\phi(-y) = \pm\phi(y)$, with eigenvalues $\pm 1$. The sign is a free choice.
+  This is clean and intuitive.
+</p>
+<p>
+  For a fermion $\psi$, the existing explanation (§7 of <em>explanation_orbifold.html</em>) states:
+</p>
+<div class="eq">
+$$\psi(-y) = (-i)\,\tilde\Gamma^1\tilde\Gamma^2\cdot P\cdot\psi(y),$$
+</div>
+<p>
+  with a factor $-i$ that has no analogue for scalars. Why does this factor appear?
+  The full answer requires understanding how the spin group $\mathrm{Spin}(2)$ relates to
+  the rotation group $SO(2)$, and how the $\mathbb{Z}_2$ orbifold element lifts from one to the other.
+</p>
+
+<div class="highlight">
+  <span class="key">One-sentence answer:</span>
+  The $\mathbb{Z}_2$ orbifold identifies $y \sim -y$, which is a rotation by $\pi$.
+  Spinors transform under the <em>double cover</em> $\mathrm{Spin}(2)$, not $SO(2)$ itself.
+  In $\mathrm{Spin}(2)$, a rotation by $\pi$ has eigenvalues $\pm i$, not $\pm 1$,
+  because the element squaring to the identity in $SO(2)$ lifts to an element that
+  squares to $-1$ (the $2\pi$-rotation phase) in $\mathrm{Spin}(2)$.
+</div>
+
+<p>
+  The rest of this note fills in exactly what this means.
+</p>
+
+
+<!-- ============================================================ -->
+<h2 id="s2">2. Step 1 — Rotations Act Differently on Different Spins</h2>
+
+<p>
+  Let $R_\alpha$ denote a rotation by angle $\alpha$ in the $(y^4, y^5)$-plane (the compact 2D space).
+  How does $R_\alpha$ act on a field of spin $s$?
+</p>
+<p>
+  Recall the general rule from quantum mechanics: the rotation operator acting on a state
+  $|s, m\rangle$ (spin $s$, $z$-projection $m$) is
+</p>
+<div class="eq">
+$$R_\alpha \,|s,m\rangle = e^{i\alpha m}\,|s,m\rangle.$$
+</div>
+<p>
+  So a particle of spin projection $m$ picks up a phase $e^{i\alpha m}$ under a rotation by $\alpha$.
+</p>
+
+<table>
+  <tr><th>Field</th><th>$s$</th><th>$m$ (in compact plane)</th><th>Phase under $R_\alpha$</th><th>Phase at $\alpha=\pi$</th></tr>
+  <tr><td>Scalar</td><td>$0$</td><td>$0$</td><td>$e^{0} = 1$</td><td>$1$</td></tr>
+  <tr><td>Vector ($A_y$, holomorphic)</td><td>$1$</td><td>$+1$</td><td>$e^{+i\alpha}$</td><td>$e^{i\pi} = -1$</td></tr>
+  <tr><td>Vector ($A_{\bar y}$, anti-holomorphic)</td><td>$1$</td><td>$-1$</td><td>$e^{-i\alpha}$</td><td>$e^{-i\pi} = -1$</td></tr>
+  <tr><td>Spinor (+ chirality)</td><td>$\frac{1}{2}$</td><td>$+\frac{1}{2}$</td><td>$e^{+i\alpha/2}$</td><td>$e^{i\pi/2} = +i$</td></tr>
+  <tr><td>Spinor (- chirality)</td><td>$\frac{1}{2}$</td><td>$-\frac{1}{2}$</td><td>$e^{-i\alpha/2}$</td><td>$e^{-i\pi/2} = -i$</td></tr>
+</table>
+<p class="caption">Phase acquired under a rotation by $\alpha$ in the compact plane, for each spin. Note that the spinor's phase is $\pm i$, not $\pm 1$, at $\alpha = \pi$.</p>
+
+<p>
+  For the $\mathbb{Z}_2$ orbifold, $\alpha = \pi$. Scalars are unaffected (phase $+1$).
+  Vectors pick up $-1$ — this is why $A_m(-y) = -A_m(y)$ for internal gauge components in §5.1 of the main note.
+  Spinors, however, pick up a phase $\pm i$, not $\pm 1$. This is the origin of the $-i$ factor.
+</p>
+
+<div class="box">
+  <span class="key">Intuition:</span>
+  Under a full $2\pi$ rotation, every field returns to itself (in bosonic theories)
+  or picks up $-1$ (for fermions). This is the spin-statistics connection.
+  A rotation by $\pi$ is "half" of $2\pi$, so fermions pick up the "square root" of $-1$,
+  which is $\pm i$.
+</div>
+
+
+<!-- ============================================================ -->
+<h2 id="s3">3. Step 2 — Why $\mathrm{Spin}(2)$ Is a Double Cover of $SO(2)$</h2>
+
+<p>
+  Let us make the above precise using the language of Lie groups and their representations.
+</p>
+<p>
+  The rotation group in 2 dimensions is $SO(2) \cong U(1)$. Its elements are matrices
+</p>
+<div class="eq">
+$$R_\alpha = \begin{pmatrix} \cos\alpha & -\sin\alpha \\ \sin\alpha & \cos\alpha \end{pmatrix}, \qquad \alpha \in [0, 2\pi).$$
+</div>
+<p>
+  This group is abelian and connected, with $\pi_1(SO(2)) = \mathbb{Z}$.
+  The universal cover is $\mathbb{R}$ (the real line), but the relevant double cover for spin-$\frac{1}{2}$
+  fields is $\mathrm{Spin}(2) \cong U(1)$.
+</p>
+<p>
+  The covering map $p: \mathrm{Spin}(2) \to SO(2)$ is:
+</p>
+<div class="eq">
+$$p:\; e^{i\phi} \;\longmapsto\; R_{2\phi} = \begin{pmatrix}\cos 2\phi & -\sin 2\phi \\ \sin 2\phi & \cos 2\phi\end{pmatrix}.$$
+</div>
+<p>
+  In words: the angle in $\mathrm{Spin}(2)$ is <em>half</em> the angle in $SO(2)$.
+  To rotate by $\alpha$ in $SO(2)$, you use the element $e^{i\alpha/2}$ in $\mathrm{Spin}(2)$.
+  The kernel of $p$ is $\{e^{i\cdot 0}, e^{i\pi}\} = \{+1, -1\}$,
+  confirming this is a 2-to-1 cover.
+</p>
+
+<p>
+  A spin-$\frac{1}{2}$ field is a section of a spinor bundle, which is a representation of
+  $\mathrm{Spin}(2)$, not $SO(2)$.
+  The spin-$\frac{1}{2}$ representation assigns to $e^{i\phi} \in \mathrm{Spin}(2)$ the phase $e^{i\phi/2}$
+  acting on the $+$ chirality component, and $e^{-i\phi/2}$ on the $-$ chirality.
+</p>
+
+<div class="box">
+  <span class="key">Consequence:</span>
+  Under a full $2\pi$ rotation in $SO(2)$, the $\mathrm{Spin}(2)$ element is $e^{i\pi} = -1$,
+  which acts on the spinor as $(-1)^{\pm 1/2 \cdot 2} = -1$.
+  That is: a fermion picks up a sign $-1$ under $2\pi$ rotation.
+  This is the defining property of spinors, and it follows directly from the structure of the double cover.
+</div>
+
+
+<!-- ============================================================ -->
+<h2 id="s4">4. Step 3 — The $\mathbb{Z}_2$ Orbifold Element Has Order 4 in $\mathrm{Spin}(2)$</h2>
+
+<p>
+  Now consider the $\mathbb{Z}_2$ orbifold identification $(y^4, y^5) \mapsto (-y^4, -y^5)$.
+  Geometrically, this is a rotation by $\pi$: the element $R_\pi \in SO(2)$.
+  It clearly has <em>order 2</em> in $SO(2)$: $(R_\pi)^2 = R_{2\pi} = \mathbf{1}$.
+</p>
+<p>
+  Now ask: what is the preimage of $R_\pi$ under the covering map $p$?
+  By the formula above, $p(e^{i\phi}) = R_{2\phi}$, so $R_\pi$ has two preimages:
+</p>
+<div class="eq">
+$$p^{-1}(R_\pi) = \left\{e^{i\pi/2},\; e^{i({\pi/2 + \pi})}\right\} = \{+i,\; -i\}.$$
+</div>
+<p>
+  Neither preimage is $\pm 1$! Both have order 4 in $\mathrm{Spin}(2)$:
+</p>
+<div class="eq">
+$$(+i)^2 = -1, \quad (+i)^4 = +1; \qquad (-i)^2 = -1, \quad (-i)^4 = +1.$$
+</div>
+<p>
+  This is the root of everything. The group-theoretic situation is:
+</p>
+
+<div class="red">
+  <span class="key">Key fact:</span>
+  In $SO(2)$, the $\mathbb{Z}_2$ generator $R_\pi$ has order 2 ($R_\pi^2 = \mathbf{1}$).
+  But its lift to $\mathrm{Spin}(2)$ has order 4 and equals $\pm i$.
+  Spinors transform under $\mathrm{Spin}(2)$, so the orbifold identification acts on them by
+  multiplication with $\pm i$ — not $\pm 1$.
+  <br><br>
+  Put differently: asking a spinor to satisfy $\psi(-y) = +\psi(y)$ (purely even) is
+  asking for the $\mathrm{Spin}(2)$ eigenvalue to be $+1$. But the available eigenvalues
+  are $\pm i$, so this equation is <em>inconsistent with the spin representation</em>.
+  The correct boundary condition must use $\pm i$.
+</div>
+
+<p>
+  The two choices of preimage ($+i$ or $-i$) correspond to the two choices of sign in the boundary condition,
+  which we call $P = \pm 1$ in the orbifold literature (with the understanding that the actual phase is $P \cdot (\pm i)$).
+</p>
+
+
+<!-- ============================================================ -->
+<h2 id="s5">5. Step 4 — The Clifford Algebra Calculation</h2>
+
+<p>
+  Let us now reproduce the phase explicitly using the Clifford algebra / gamma matrix formalism,
+  which is what you encounter in the string theory papers.
+</p>
+
+<h3>5.1 &nbsp; Setup: generators of rotations in the Dirac representation</h3>
+
+<p>
+  In $d$ spacetime dimensions, the Lorentz group $SO(1,d-1)$ acts on Dirac spinors via
+  the spin representation. The generators are the antisymmetric products of gamma matrices:
+</p>
+<div class="eq">
+$$S^{\mu\nu} = \frac{i}{4}[\Gamma^\mu, \Gamma^\nu].$$
+</div>
+<p>
+  For a rotation (not a boost) by angle $\alpha$ in the $(\mu,\nu)$-plane, the spinor transforms as:
+</p>
+<div class="eq">
+$$\psi \;\to\; U_\alpha\,\psi, \qquad U_\alpha = \exp\!\left(-i\alpha S^{\mu\nu}\right)
+= \exp\!\left(-\frac{\alpha}{4}[\Gamma^\mu,\Gamma^\nu]\right).$$
+</div>
+
+<h3>5.2 &nbsp; The compact plane: $\mu=4$, $\nu=5$</h3>
+
+<p>
+  For the compact $T^2/\mathbb{Z}_2$ orbifold, the relevant rotation is in the $(y^4, y^5)$-plane.
+  Let $\tilde\Gamma^4$ and $\tilde\Gamma^5$ be the gamma matrices in those directions, satisfying
+  $\{\tilde\Gamma^4,\tilde\Gamma^5\} = 2\delta^{45} = 0$ and $(\tilde\Gamma^4)^2 = (\tilde\Gamma^5)^2 = 1$.
+  (We use Euclidean signature for the compact directions.)
+  Define
+</p>
+<div class="eq">
+$$\Sigma \equiv S^{45} = \frac{i}{4}[\tilde\Gamma^4,\tilde\Gamma^5] = \frac{i}{2}\tilde\Gamma^4\tilde\Gamma^5.$$
+</div>
+<p>
+  (In the last step we used $[\tilde\Gamma^4,\tilde\Gamma^5] = 2\tilde\Gamma^4\tilde\Gamma^5$ since they anticommute.)
+</p>
+
+<p>
+  The rotation operator by angle $\alpha = \pi$ is:
+</p>
+<div class="eq">
+\begin{align}
+U_\pi &= \exp\!\left(-i\pi S^{45}\right)
+= \exp\!\left(-i\pi \cdot \frac{i}{2}\tilde\Gamma^4\tilde\Gamma^5\right)
+= \exp\!\left(\frac{\pi}{2}\tilde\Gamma^4\tilde\Gamma^5\right).
+\end{align}
+</div>
+
+<h3>5.3 &nbsp; Evaluating the exponential</h3>
+
+<p>
+  To evaluate $e^{\frac{\pi}{2}\tilde\Gamma^4\tilde\Gamma^5}$, note that the matrix
+  $M \equiv \tilde\Gamma^4\tilde\Gamma^5$ satisfies $M^2 = -\mathbf{1}$ (since
+  $\tilde\Gamma^4$ and $\tilde\Gamma^5$ anticommute and each squares to $+1$):
+</p>
+<div class="eq">
+$$M^2 = \tilde\Gamma^4\tilde\Gamma^5\tilde\Gamma^4\tilde\Gamma^5
+= -\tilde\Gamma^4\tilde\Gamma^4\tilde\Gamma^5\tilde\Gamma^5 = -(\mathbf{1})(\mathbf{1}) = -\mathbf{1}.$$
+</div>
+<p>
+  So $M$ behaves like the imaginary unit $i$: $M^{2k} = (-1)^k \mathbf{1}$ and $M^{2k+1} = (-1)^k M$.
+  Using the Taylor series $e^{\theta M} = \cos\theta\,\mathbf{1} + \sin\theta\, M$ (valid for any $M$ with $M^2=-1$):
+</p>
+<div class="eq">
+$$U_\pi = e^{\frac{\pi}{2}M} = \cos\!\frac{\pi}{2}\,\mathbf{1} + \sin\!\frac{\pi}{2}\,M = 0\cdot\mathbf{1} + 1\cdot M = \tilde\Gamma^4\tilde\Gamma^5.$$
+</div>
+
+<div class="highlight">
+  <span class="key">Result:</span>
+  A rotation by $\pi$ in the compact plane acts on a spinor as multiplication by $\tilde\Gamma^4\tilde\Gamma^5$.
+  This is the matrix that appears in the orbifold boundary condition.
+</div>
+
+<h3>5.4 &nbsp; The eigenvalues are $\pm i$</h3>
+
+<p>
+  Let us verify that $\tilde\Gamma^4\tilde\Gamma^5$ has eigenvalues $\pm i$ as expected from the group theory.
+  Since $(\tilde\Gamma^4\tilde\Gamma^5)^2 = -\mathbf{1}$, the eigenvalues $\lambda$ satisfy $\lambda^2 = -1$,
+  giving $\lambda = \pm i$. Concretely, in the standard $2\times 2$ Pauli representation:
+</p>
+<div class="eq">
+$$\tilde\Gamma^4 = \sigma_1 = \begin{pmatrix}0&1\\1&0\end{pmatrix}, \qquad
+\tilde\Gamma^5 = \sigma_2 = \begin{pmatrix}0&-i\\i&0\end{pmatrix},$$
+$$\tilde\Gamma^4\tilde\Gamma^5 = \sigma_1\sigma_2 = i\sigma_3 = \begin{pmatrix}i&0\\0&-i\end{pmatrix}.$$
+</div>
+<p>
+  The eigenvalues are $+i$ and $-i$, with eigenvectors $\begin{pmatrix}1\\0\end{pmatrix}$ (positive chirality)
+  and $\begin{pmatrix}0\\1\end{pmatrix}$ (negative chirality).
+  This matches the table in §2: the two chirality components pick up phases $+i$ and $-i$ under $R_\pi$.
+</p>
+
+
+<!-- ============================================================ -->
+<h2 id="s6">6. Step 5 — Putting It Together: The Boundary Condition</h2>
+
+<p>
+  The orbifold identification $(y^4,y^5) \sim -(y^4,y^5)$ says that the two points $y$ and $-y$ are
+  the same physical point. A physical field $\Phi$ must be single-valued on the orbifold.
+  Since $y$ and $-y$ are identified, the field values at these two points need not be equal —
+  they need to be related by the action of the orbifold group element (spacetime + gauge):
+</p>
+<div class="eq">
+$$\Phi(-y) = R \cdot \Phi(y).$$
+</div>
+<p>
+  Consistency requires that applying this identification <em>twice</em> returns the field to itself:
+  $\Phi(y) = R^2 \Phi(y)$, i.e., $R^2 = \mathbf{1}$.
+  The total operator $R$ is the product of the spin part (determined by the $\pi$-rotation on spinors)
+  and the gauge part $P$:
+</p>
+<div class="eq">
+$$R = U_{\text{spin}} \cdot P.$$
+</div>
+
+<h3>6.1 &nbsp; The problem with the naive boundary condition</h3>
+
+<p>
+  For a scalar, the spin part is trivial: $U_{\text{spin}} = +1$, so $R = P$ and $R^2 = P^2 = 1$.
+  For a vector $A_m$ (compact components), $U_{\text{spin}} = -1$, so again $R = -P$ and $R^2 = P^2 = 1$.
+  In both cases, $P^2 = 1$ is the natural condition — $P = \pm 1$ for $U(1)$, a standard $\mathbb{Z}_2$ element.
+</p>
+<p>
+  For a fermion, however, the spin part is $U_{\text{spin}} = \tilde\Gamma^4\tilde\Gamma^5$.
+  The consistency condition $R^2 = 1$ becomes:
+</p>
+<div class="eq">
+$$R^2 = (\tilde\Gamma^4\tilde\Gamma^5)^2 \cdot P^2 = (-\mathbf{1}) \cdot P^2 \stackrel{!}{=} \mathbf{1}
+\quad\Longrightarrow\quad P^2 = -\mathbf{1}.$$
+</div>
+<p>
+  This says $P = \pm i$ for fermions — which is an element of order 4, not order 2.
+  But $P$ is supposed to be a <em>universal</em> gauge embedding (the same for all fields of the same gauge charge),
+  and for bosons it must satisfy $P^2 = +1$. These two conditions are incompatible!
+</p>
+
+<h3>6.2 &nbsp; The resolution: the factor $(-i)$ is not a convention</h3>
+
+<p>
+  The resolution is to redefine the spin part of the boundary condition by absorbing a phase.
+  Define
+</p>
+<div class="eq">
+$$\tilde U \;\equiv\; (-i)\,\tilde\Gamma^4\tilde\Gamma^5 = (-i)(i\sigma_3) = \sigma_3.$$
+</div>
+<p>
+  Now $\tilde U^2 = \sigma_3^2 = \mathbf{1}$, and the boundary condition becomes
+</p>
+<div class="eq">
+$$\boxed{\psi(-y) = (-i)\,\tilde\Gamma^4\tilde\Gamma^5\cdot P\cdot \psi(y) = \sigma_3\cdot P\cdot\psi(y),}$$
+</div>
+<p>
+  with the consistency condition $(\sigma_3 P)^2 = P^2 = \mathbf{1}$. Now $P = \pm 1$ works for fermions <em>and</em> bosons alike.
+</p>
+
+<div class="red">
+  <span class="key">The $(-i)$ is not a free convention.</span>
+  It is the <strong>unique</strong> phase (up to the irrelevant sign choice $\pm i$, which maps $P \to -P$)
+  that makes the spin factor an involution ($\tilde U^2 = 1$). Without it,
+  $P$ would need to satisfy $P^2 = -1$ for fermions while satisfying $P^2 = +1$ for bosons,
+  and you could not have a universal $\mathbb{Z}_2$ gauge embedding.
+  The $(-i)$ is "the cost of living in $\mathrm{Spin}(2)$ rather than $SO(2)$."
+</div>
+
+<p>
+  Physically, you can think of it this way: the $(-i)$ is a $U(1)$ phase that gets redistributed between
+  the spin and gauge sectors. The total operator $R = \tilde\Gamma^4\tilde\Gamma^5 \cdot P_{\text{raw}}$ always
+  has $R^2 = 1$. But rather than having $P_{\text{raw}} = \pm i$ for fermions, the standard convention absorbs
+  the $(-i)$ into the spin factor so that $P$ takes the same values ($\pm 1$) for all fields.
+</p>
+
+<h3>6.3 &nbsp; The boundary condition in components</h3>
+
+<p>
+  Writing out the two chirality components explicitly:
+</p>
+<div class="eq">
+$$\psi_+(-y) = +P\,\psi_+(y), \qquad \psi_-(-y) = -P\,\psi_-(y).$$
+</div>
+<p>
+  So if $P=+1$: $\psi_+$ is even (zero mode survives) and $\psi_-$ is odd (projected out).
+  If $P=-1$: opposite.
+</p>
+
+
+<!-- ============================================================ -->
+<h2 id="s7">7. Step 6 — Why This Forces Chirality</h2>
+
+<p>
+  The crucial difference between scalars and fermions is now manifest:
+</p>
+<ul>
+  <li>
+    <strong>Scalar:</strong> The orbifold parity is $\phi(-y) = P\,\phi(y)$ with $P = \pm 1$.
+    The field has a single component, and the choice of $P$ is free.
+    You can give any scalar field either parity independently.
+  </li>
+  <li>
+    <strong>Fermion:</strong> The boundary condition is $\psi(-y) = \sigma_3\, P\,\psi(y)$.
+    The matrix $\sigma_3 = \mathrm{diag}(+1,-1)$ acts on the two chirality components and
+    <em>automatically assigns them opposite parities</em>. There is no way to make both even or both odd.
+    The choice of $P$ only selects <em>which</em> chirality survives — not whether the split happens.
+  </li>
+</ul>
+<p>
+  This locking is a direct consequence of the $\pm i$ eigenvalues. It is the mechanism by which
+  the orbifold produces chiral 4D fermions from a vector-like higher-dimensional theory.
+</p>
+
+<div class="highlight">
+  <span class="key">Summary:</span>
+  The origin of the $(-i)$ factor is the mismatch between $\mathbb{Z}_2$ in $SO(2)$ (order 2) and its lift in
+  $\mathrm{Spin}(2)$ (order 4). The physical consequence is that the two chirality components of a fermion
+  are forced into opposite orbifold parities, producing a chiral zero-mode spectrum.
+</div>
+
+
+<!-- ============================================================ -->
+<h2 id="s8">8. Consistency Check: Scalars vs. Spinors</h2>
+
+<p>
+  It is instructive to see the same logic for each field type:
+</p>
+
+<table>
+  <tr>
+    <th>Field</th>
+    <th>Transform under $R_\pi$</th>
+    <th>Eigenvalues</th>
+    <th>Orbifold parity</th>
+    <th>Zero-mode condition</th>
+  </tr>
+  <tr>
+    <td>Scalar $\phi$</td>
+    <td>$\phi \to \phi$ (trivially, spin 0)</td>
+    <td>$+1$</td>
+    <td>$\phi(-y) = \pm \phi(y)$, free choice</td>
+    <td>Either $\phi_0 = +\phi_0$ or $\phi_0 = -\phi_0$ (latter: no mode)</td>
+  </tr>
+  <tr>
+    <td>Vector $A_\mu$ (4D)</td>
+    <td>$A_\mu \to A_\mu$ (4D indices unaffected)</td>
+    <td>$+1$</td>
+    <td>$A_\mu(-y) = +A_\mu(y)$</td>
+    <td>Zero mode survives (massless gauge boson)</td>
+  </tr>
+  <tr>
+    <td>Vector $A_m$ (compact)</td>
+    <td>$A_m \to -A_m$ (spin 1 in compact plane: $m = \pm 1$ picks up $e^{\pm i\pi} = -1$)</td>
+    <td>$-1$</td>
+    <td>$A_m(-y) = -A_m(y)$</td>
+    <td>No zero mode (scalar is projected out)</td>
+  </tr>
+  <tr>
+    <td>Spinor $\psi_+$</td>
+    <td>$\psi_+ \to e^{+i\pi/2}\psi_+ = +i\,\psi_+$</td>
+    <td>$+i$</td>
+    <td>Locked opposite to $\psi_-$</td>
+    <td>Survives if eigenvalue of boundary operator is $+1$</td>
+  </tr>
+  <tr>
+    <td>Spinor $\psi_-$</td>
+    <td>$\psi_- \to e^{-i\pi/2}\psi_- = -i\,\psi_-$</td>
+    <td>$-i$</td>
+    <td>Locked opposite to $\psi_+$</td>
+    <td>Projected out (opposite to $\psi_+$)</td>
+  </tr>
+</table>
+<p class="caption">
+  Summary of how each field type transforms under the $\mathbb{Z}_2$ rotation by $\pi$ in the compact plane.
+  The spinor row is the key one: eigenvalues $\pm i$ vs. $\pm 1$ for everything else.
+</p>
+
+
+<!-- ============================================================ -->
+<h2 id="s85">9. Why the Inversion Is a Rotation on Any Torus</h2>
+
+<p>
+  A natural objection: the torus $T^2$ generically has <em>no</em> continuous rotational symmetry.
+  Only special lattices (square, hexagonal) have enhanced discrete rotation groups ($\mathbb{Z}_4$, $\mathbb{Z}_6$).
+  A generic oblique lattice has no rotational symmetry beyond the identity.
+  So how can we say that the $\mathbb{Z}_2$ action $(y_1,y_2) \to (-y_1,-y_2)$ is "a rotation by $\pi$"?
+</p>
+
+<h3>9.1 &nbsp; The inversion is a symmetry of every lattice</h3>
+
+<p>
+  The $\mathbb{Z}_2$ inversion $y \to -y$ is special: it is a symmetry of <strong>every</strong> lattice $\Lambda$,
+  regardless of its shape.
+  If $\vec{v} \in \Lambda$, then $-\vec{v} \in \Lambda$ (lattices are closed under negation by definition).
+  So the map $y \to -y$ descends to a well-defined isometry of $T^2 = \mathbb{R}^2/\Lambda$ for any $\Lambda$.
+  This is why the $\mathbb{Z}_2$ orbifold $T^2/\mathbb{Z}_2$ exists for any torus, while
+  $T^2/\mathbb{Z}_4$ or $T^2/\mathbb{Z}_6$ require special lattices.
+</p>
+
+<h3>9.2 &nbsp; The spinor transformation depends on the Jacobian, not the lattice</h3>
+
+<p>
+  The question of how the inversion acts on spinors is a <em>local</em> question,
+  not a global one. On a flat manifold (the torus has zero curvature), the spin connection is trivial,
+  and the action of an isometry on spinors is determined entirely by its <strong>Jacobian</strong> —
+  the linear map on the tangent space at each point.
+</p>
+<p>
+  The Jacobian of $(y_1, y_2) \mapsto (-y_1, -y_2)$ is:
+</p>
+<div class="eq">
+$$J = \frac{\partial(-y)}{\partial y} = \begin{pmatrix} -1 & 0 \\ 0 & -1 \end{pmatrix} = -\mathbf{1}_{2\times 2}.$$
+</div>
+<p>
+  In 2D, $-\mathbf{1} = R_\pi$ — the matrix $-\mathbf{1}$ <em>is</em> the rotation by $\pi$, regardless of
+  coordinates or lattice shape. (In $d$ dimensions, $-\mathbf{1} \in SO(d)$ for $d$ even, since $\det(-\mathbf{1}) = (-1)^d = +1$.)
+</p>
+
+<div class="highlight">
+  <span class="key">The distinction:</span>
+  The torus need not have $SO(2)$ as a <em>continuous symmetry group</em> for a single rotation by $\pi$
+  to be a symmetry. You do not need the full circle of rotations — only the single discrete element $R_\pi$.
+  And this element is always a lattice symmetry because $-\vec{v} \in \Lambda$ for any lattice vector $\vec{v}$.
+</div>
+
+<p>
+  Since the Jacobian is $R_\pi \in SO(2)$, the lift to $\mathrm{Spin}(2)$ gives $\tilde\Gamma^4\tilde\Gamma^5$ (eigenvalues $\pm i$),
+  exactly as computed in §5. The shape of the lattice is irrelevant for this calculation.
+</p>
+
+<div class="box">
+  <span class="key">Analogy:</span>
+  A rectangle has no continuous rotational symmetry. But the map $(x,y) \to (-x,-y)$ is still a symmetry,
+  and it is still described by the $2\times 2$ matrix $-\mathbf{1} = R_\pi$.
+  A spinor living on the rectangle would still pick up the phase $\pm i$ under this map,
+  because the phase comes from the Jacobian $R_\pi$, not from the existence of other rotational symmetries.
+</div>
+
+
+<!-- ============================================================ -->
+<h2 id="s9">10. The Deeper Picture: Spin Structures on Orbifolds</h2>
+
+<p>
+  There is an even more fundamental way to state the result.
+  On a smooth manifold, specifying a spinor bundle requires choosing a <strong>spin structure</strong>:
+  a consistent way to assign the sign that the spinor picks up when transported around non-contractible loops.
+  On a torus $T^2$, there are four inequivalent spin structures (one for each element of $H^1(T^2,\mathbb{Z}_2)$).
+</p>
+<p>
+  When you orbifold by $\mathbb{Z}_2$, you introduce orbifold fixed points.
+  Around each fixed point, the space looks like $\mathbb{R}^2/\mathbb{Z}_2$, which is a cone.
+  The tip of the cone is not a smooth point, so the standard notion of spin structure does not directly apply.
+  Instead, you must specify a <strong>discrete torsion</strong> — a phase that the spinor picks up
+  when transported to and from the fixed point.
+</p>
+<p>
+  The boundary condition $\psi(-y) = (-i)\tilde\Gamma^4\tilde\Gamma^5\cdot P\cdot\psi(y)$ is precisely
+  this choice of discrete torsion. The factor $(-i)\tilde\Gamma^4\tilde\Gamma^5$ is forced by the spin structure
+  (the holonomy of the spin connection around the orbifold identification, normalized to an involution), and $P$ is the
+  additional discrete choice that you are free to make.
+</p>
+
+<div class="box">
+  <span class="key">Physical phrasing:</span>
+  Think of the orbifold fixed point as a "boundary" in the compact space.
+  At this boundary, you must specify what happens to the spinor. For a scalar,
+  you simply choose Dirichlet or Neumann. For a spinor, the spin connection itself
+  forces the two chirality components into opposite parities (the $(-i)\tilde\Gamma^4\tilde\Gamma^5 = \sigma_3$ factor),
+  and on top of that you choose which chirality survives via $P$.
+  Without $P$, there would be no freedom at all for fermions — the boundary condition
+  would be completely determined by geometry.
+</div>
+
+<h3>10.1 &nbsp; The group theory in one line</h3>
+<p>
+  For $G = \mathbb{Z}_2 = \{e, g\}$ with $g^2 = e$, a representation of $G$ assigns a matrix $\rho(g)$
+  satisfying $\rho(g)^2 = \rho(e) = \mathbf{1}$.
+  So $\rho(g)$ must have eigenvalues $\pm 1$ — fine for scalars.
+</p>
+<p>
+  But spinors do not transform under $G = \mathbb{Z}_2 \subset SO(2)$ directly.
+  They transform under the <em>lift</em> of $G$ to $\mathrm{Spin}(2)$.
+  The lift of $g = R_\pi$ is the element $\tilde g = e^{i\pi/2} = +i$ (or $-i$) in $\mathrm{Spin}(2)$.
+  Now $\tilde g^2 = i^2 = -1 \neq +1$, so the lifted element does <em>not</em> generate a $\mathbb{Z}_2$
+  in $\mathrm{Spin}(2)$ — it generates a $\mathbb{Z}_4$.
+  Consequently, the representation of the lifted element has eigenvalues $\pm i$, not $\pm 1$.
+  To restore a $\mathbb{Z}_2$ structure, one absorbs a factor $(-i)$ into the spin operator,
+  giving $(-i)\tilde\Gamma^4\tilde\Gamma^5 = \sigma_3$ which squares to $+1$.
+</p>
+
+<div class="summary-chain">
+  <strong>Summary chain:</strong>
+  <ol style="margin:0; padding-left: 22px;">
+    <li>The orbifold $\mathbb{Z}_2$ generator is a rotation by $\pi$ in the compact plane: $g = R_\pi \in SO(2)$.
+        This is well-defined on <em>any</em> torus because $-\vec{v} \in \Lambda$ for every lattice;
+        the spinor transformation depends only on the Jacobian $J = -\mathbf{1} = R_\pi$,
+        not on the lattice shape (§9).</li>
+    <li>Fermions transform under the double cover $\mathrm{Spin}(2)$, not $SO(2)$.</li>
+    <li>The preimage of $R_\pi$ in $\mathrm{Spin}(2)$ is $\tilde g = \pm i$, which has order 4, not order 2.</li>
+    <li>In the Clifford algebra, $\tilde g$ acts on spinors as the matrix $\tilde\Gamma^4\tilde\Gamma^5$,
+        which satisfies $(\tilde\Gamma^4\tilde\Gamma^5)^2 = -\mathbf{1}$ and has eigenvalues $\pm i$.</li>
+    <li>Orbifold consistency ($R^2 = 1$) requires normalizing the spin factor to an involution:
+        $(-i)\tilde\Gamma^4\tilde\Gamma^5 = \sigma_3$ (squares to $+1$).
+        This is <em>not</em> a convention — it is the unique choice that allows $P$ to be a universal
+        $\mathbb{Z}_2$ gauge embedding ($P^2 = 1$) for both bosons and fermions.</li>
+    <li>The boundary condition $\psi(-y) = (-i)\tilde\Gamma^4\tilde\Gamma^5\cdot P\cdot\psi(y) = \sigma_3 P\,\psi(y)$
+        automatically gives the two chirality components opposite parities,
+        projecting out half the modes and leaving a chiral 4D spectrum.</li>
+  </ol>
+</div>
+
+</body>
+</html>

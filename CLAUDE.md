@@ -1,31 +1,48 @@
-# CLAUDE.md
+# CLAUDE.md — XiuyuanProject
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## Project overview
+Literature reading and research notes for a collaboration with Xiuyuan, focused on:
+- **Non-invertible symmetries** and their applications to flavor physics
+- **Strong CP problem** — non-invertible PQ symmetry, massless quark solution
+- **String compactifications** — magnetized D-brane models, orbifold constructions, Yukawa textures
 
-## Repository Purpose
+## Output format
+**Always produce HTML with MathJax** for explanations, notes, and calculations.
+Only use `.tex` when Zekai explicitly requests it.
+MathJax CDN: `https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js`
+Style reference: `explanation_Ng_Nc.html`
 
-This is a theoretical physics paper reading and research repository. It contains LaTeX source files for arXiv papers, primarily in high energy physics (flavor symmetries, non-invertible symmetries, string compactifications, strong CP problem).
+## Repository structure
 
-## Conventions
+### Papers
+| Folder | arXiv | Title | Topic |
+|---|---|---|---|
+| `Yukawa textures from non-invertible symmetries/` | 2409.05270 | *Yukawa textures from non-invertible symmetries* | Kobayashi, Otsuka, Tanimoto — non-invertible $\mathbb{Z}_M$ + gauged $\mathbb{Z}_2$; NNI texture for quarks/leptons |
+| `Non-Invertible Peccei-Quinn Symmetry and the Massless Quark Solution to the Strong CP Problem/` | 2402.12453 | *Non-Invertible Peccei-Quinn Symmetry and the Massless Quark Solution to the Strong CP Problem* | Córdova, Hong, Koren — non-invertible PQ symmetry, $SU(9)$ color-flavor unification, fractional instantons, strong CP |
+| `Magnetized orbifold models` | 0806.4748 | *Magnetized orbifold models* | Abe, Kobayashi, Ohki — zero-modes on $T^6/(\mathbb{Z}_2\times\mathbb{Z}'_2)$ with magnetic fluxes, three-family models |
 
-### Paper storage
-- Papers are stored as folders named by their arXiv ID (e.g., `arXiv-2402.12453v1`) until read, after which the folder is renamed to the paper's title.
-- Some papers arrive as a single `.tex` file with no folder; once read, the file is also renamed to the paper's title (e.g., `Magnetized orbifold models`).
-- The main tex file is typically named `draft.tex` or `draft_arXiv.tex`.
+Main `.tex` file is typically named `draft.tex` or `draft_arXiv.tex`.
 
-### Reading papers
-- Always read the LaTeX source directly — it preserves all equations and structure.
-- The abstract and title are near the top of the `.tex` file, before `\begin{document}` or just after `\maketitle`.
-- For large `.tex` files (>10,000 tokens), read in chunks of ~150 lines at a time using `offset` and `limit`.
+### HTML explanation files
+| File | Contents |
+|---|---|
+| `explanation_Ng_Nc.html` | Why non-invertible PQ symmetry (arXiv:2402.12453) requires $N_g = N_c = 3$ |
+| `explanation_magnetized_orbifold.html` | Full explainer: magnetized orbifold models, zero-mode counting, Yukawa selection rules, three-family models |
+| `explanation_orbifold.html` | Orbifold construction basics |
+| `explanation_orbifold_fermion_phase.html` | Fermion phase structure on orbifolds |
+| `explanation_gauge_fields_on_orbifold.html` | Gauge fields on orbifold background |
 
-### Outputting explanations
-- When asked to explain something with equations, produce an HTML file using MathJax for rendering (see `explanation_Ng_Nc.html` as a template). The user opens these directly in a browser.
-- Use `https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js` as the MathJax CDN.
+## Reading papers
+- Read LaTeX source directly — preserves all equations and structure
+- Abstract and title are near the top of `.tex`, before `\begin{document}` or just after `\maketitle`
+- For large files (>10,000 tokens), read in chunks of ~150 lines using `offset` and `limit`
 
-## Current Papers
+## Paper storage convention
+- On arrival: folder named by arXiv ID (e.g. `arXiv-2402.12453v1/`)
+- After reading: rename folder to paper's full title
+- Single `.tex` files (no folder): rename file to the paper title
 
-| Folder / File | Title | Topic |
-|---|---|---|
-| `Yukawa textures from non-invertible symmetries/` | *Yukawa textures from non-invertible symmetries* | Non-invertible symmetries → Yukawa textures for quarks/leptons; NNI texture from $\mathbb{Z}_M$ + gauged $\mathbb{Z}_2$ |
-| `Non-Invertible Peccei-Quinn Symmetry and the Massless Quark Solution to the Strong CP Problem/` | *Non-Invertible Peccei-Quinn Symmetry and the Massless Quark Solution to the Strong CP Problem* | Non-invertible PQ symmetry from fractional instantons in $(SU(3)_C \times U(1)_H)/\mathbb{Z}_3$; $SU(9)$ color-flavor unification; strong CP solution |
-| `Magnetized orbifold models` | *Magnetized orbifold models* | Magnetized D-brane compactifications on orbifolds |
+## Git / GitHub
+Remote: `KaneWang-123/XiuyuanProject`  
+Branch: `master`
+Do not commit `.DS_Store` (covered by `.gitignore`).

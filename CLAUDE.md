@@ -31,6 +31,8 @@ Main `.tex` file is typically named `draft.tex` or `draft_arXiv.tex`.
 | `explanation_orbifold.html` | Orbifold construction basics |
 | `explanation_orbifold_fermion_phase.html` | Fermion phase structure on orbifolds |
 | `explanation_gauge_fields_on_orbifold.html` | Gauge fields on orbifold background |
+| `explanation_yukawa_noninvertible.html` | Summary of arXiv:2409.05270 (Yukawa textures from non-invertible symmetries) and its connection to magnetized orbifold zero modes |
+| `explanation_index_theorem_orbifold.html` | Index theorem on orbifolds: Atiyah-Singer, Kawasaki, Atiyah-Segal-Singer fixed point theorem, Lefschetz numbers, winding numbers, localized flux, blow-up manifolds — physicist-friendly summary |
 
 ## Reading papers
 - Read LaTeX source directly — preserves all equations and structure

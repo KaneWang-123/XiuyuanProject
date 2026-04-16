@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yukawa Textures from Non-Invertible Symmetries &mdash; Summary &amp; Connection to Magnetized Orbifolds</title>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+    body {
+      font-family: "Georgia", serif;
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 30px;
+      line-height: 1.85;
+      color: #222;
+      background: #fafafa;
+    }
+    h1 { font-size: 1.6em; border-bottom: 2px solid #444; padding-bottom: 10px; }
+    h2 { font-size: 1.25em; color: #1a1a6e; margin-top: 44px; border-left: 4px solid #1a1a6e; padding-left: 12px; }
+    h3 { font-size: 1.05em; color: #333; margin-top: 28px; }
+    .meta { font-style: italic; color: #555; margin-bottom: 32px; }
+    .box {
+      background: #fff;
+      border-left: 4px solid #1a1a6e;
+      padding: 14px 20px;
+      margin: 22px 0;
+      border-radius: 0 6px 6px 0;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+    .highlight {
+      background: #f0f4ff;
+      border: 1px solid #b0bcee;
+      padding: 16px 20px;
+      border-radius: 6px;
+      margin: 22px 0;
+    }
+    .key { font-weight: bold; color: #1a1a6e; }
+    .connection {
+      background: #fffbe6;
+      border: 1px solid #e6d87a;
+      padding: 18px 22px;
+      border-radius: 6px;
+      margin: 30px 0;
+    }
+    table {
+      border-collapse: collapse;
+      margin: 20px auto;
+      font-size: 0.93em;
+    }
+    th, td {
+      border: 1px solid #bbb;
+      padding: 7px 14px;
+      text-align: center;
+    }
+    th { background: #e8ecf8; }
+    .eq { margin: 18px 0; overflow-x: auto; }
+    hr { border: none; border-top: 1px solid #ddd; margin: 40px 0; }
+    .ref { font-size: 0.85em; color: #555; font-style: italic; }
+  </style>
+</head>
+<body>
+
+<h1>Yukawa Textures from Non-Invertible Symmetries</h1>
+<p class="meta">
+  T. Kobayashi, H. Otsuka, M. Tanimoto &mdash; arXiv:2409.05270
+  <br>Summary and connection to magnetized orbifold models (arXiv:0806.4748)
+</p>
+
+<!-- ====================================================== -->
+<h2>1. What the Paper Does</h2>
+
+<p>
+  The paper applies <strong>non-invertible symmetries</strong> to the flavor problem of quarks and leptons.
+  The core idea is simple:
+</p>
+<ol>
+  <li>Start with a $\mathbb{Z}_M$ discrete symmetry among fermion generations.</li>
+  <li>Gauge a $\mathbb{Z}_2$ subgroup (i.e., identify charges $q \sim M-q$).</li>
+  <li>The resulting symmetry is <em>non-invertible</em>: a single state carries both charge $k$ and charge $M-k$ simultaneously, so the "fusion" of representations is not group-like.</li>
+</ol>
+<p>
+  The authors then systematically classify which <strong>Yukawa textures</strong> (patterns of zeros in the mass matrix) this non-invertible symmetry can enforce, for $M = 3, 4, 5, 6, 7$, and show that some of these textures are <em>impossible</em> to obtain from any conventional (invertible) symmetry.
+</p>
+
+<!-- ====================================================== -->
+<h2>2. The Non-Invertible Symmetry: Construction</h2>
+
+<p>
+  The $\mathbb{Z}_M$ generator $g$ has $M$ conjugacy classes $g^0, g^1, \ldots, g^{M-1}$.
+  Introduce the outer automorphism $r: g \mapsto g^{-1}$ and gauge the $\mathbb{Z}_2 = \{e, r\}$.
+  This identifies $g^k$ with $g^{M-k}$, giving equivalence classes:
+</p>
+<div class="eq">
+$$[g^k] = \{g^k,\, g^{M-k}\}, \qquad k = 0, 1, \ldots, \lfloor M/2 \rfloor.$$
+</div>
+<p>
+  The number of distinct classes is $\lfloor M/2 \rfloor + 1$.
+  The fusion rule for these classes is:
+</p>
+<div class="eq">
+$$[g^k]\,[g^{k'}] = [g^{k+k'}] + [g^{M-k+k'}].$$
+</div>
+<p>
+  This is <em>not</em> a group multiplication &mdash; the product of two simple objects gives a sum of two objects. This is the hallmark of a non-invertible (categorical) symmetry.
+</p>
+
+<div class="box">
+  <span class="key">Selection rule:</span>
+  An $n$-point coupling among fields in classes $[g^{k_1}], \ldots, [g^{k_n}]$ is allowed if and only if there exists a choice of signs such that
+  $$\sum_{i=1}^n \pm k_i \equiv 0 \pmod{M}.$$
+  Intuitively, each field simultaneously carries charges $+k$ and $-k$ (mod $M$), and you can pick either sign for each field independently.
+</div>
+
+<!-- ====================================================== -->
+<h2>3. Key Example: $M=5$ and the NNI Texture</h2>
+
+<p>
+  For $M = 5$, there are 3 classes: $[g^0]$, $[g^1]$, $[g^2]$ &mdash; perfect for three generations.
+  Assign the three generations of left-handed and right-handed fermions to these classes.
+  If the Higgs is in representation $[g^1]$, the Yukawa matrix is:
+</p>
+<div class="eq">
+$$Y_{[g^1]} = \begin{pmatrix}
+0 & a & 0 \\
+b & 0 & c \\
+0 & d & e
+\end{pmatrix}.$$
+</div>
+<p>
+  This is the <strong>nearest neighbor interaction (NNI)</strong> texture &mdash; a phenomenologically important form
+  that is known to be consistent with all observed CKM mixing and quark masses. The NNI texture
+  <em>cannot</em> be derived from any conventional $U(1)$ or $\mathbb{Z}_N$ symmetry without introducing
+  extra particles (e.g., multiple Higgs fields). The non-invertible symmetry produces it naturally.
+</p>
+
+<div class="highlight">
+  <span class="key">Why conventional symmetry fails for NNI:</span>
+  Suppose two left-handed quarks have $U(1)$ charges $Q_1, Q_2$ and two right-handed quarks have $q_1, q_2$.
+  Non-vanishing entries at positions $(1,2)$, $(2,1)$, and $(2,2)$ require
+  $Q_1 + q_2 = Q_2 + q_1 = Q_2 + q_2$, implying $Q_1 = Q_2$ and $q_1 = q_2$.
+  But then the $(1,1)$ entry should also be allowed &mdash; contradicting the texture zero.
+  No assignment of $U(1)$ or $\mathbb{Z}_N$ charges can enforce this pattern.
+</div>
+
+<p>Other Higgs representations give other textures:</p>
+
+<table>
+  <tr><th>Higgs rep</th><th>Yukawa texture ($M=5$)</th><th>Comment</th></tr>
+  <tr>
+    <td>$[g^0]$</td>
+    <td>$\mathrm{diag}(a, b, c)$</td>
+    <td>Diagonal &mdash; same as $\mathbb{Z}_5$</td>
+  </tr>
+  <tr>
+    <td>$[g^1]$</td>
+    <td>$\begin{pmatrix} 0 & a & 0 \\ b & 0 & c \\ 0 & d & e \end{pmatrix}$</td>
+    <td><strong>NNI texture</strong> &mdash; unique to non-invertible symmetry</td>
+  </tr>
+  <tr>
+    <td>$[g^2]$</td>
+    <td>$\begin{pmatrix} 0 & 0 & a \\ 0 & b & c \\ d & e & 0 \end{pmatrix}$</td>
+    <td>Also non-trivial, impossible from conventional symmetry</td>
+  </tr>
+</table>
+
+<!-- ====================================================== -->
+<h2>4. Phenomenological Applications</h2>
+
+<h3>4.1 Quarks</h3>
+<p>
+  In a supersymmetric setup with two Higgs doublets $H_U$ and $H_D$ carrying different non-invertible charges,
+  the NNI basis is obtained for both up- and down-type quarks with $M=5$, $H_{U,D}$ in class $[g^1]$.
+  This is fully consistent with the CKM matrix and quark masses.
+</p>
+<p>
+  Additionally, the "Occam's Razor" textures of Ref.&nbsp;[Tanimoto 2016] &mdash; minimal-parameter down-quark
+  mass matrices in the diagonal-up basis &mdash; can also be obtained by suitable charge assignments.
+</p>
+
+<h3>4.2 Leptons</h3>
+<p>
+  The seesaw mechanism texture of Ref.&nbsp;[Kaneta&ndash;Tanimoto 2016], where:
+</p>
+<ul>
+  <li>The charged lepton Yukawa $Y_E$ is diagonal ($H_D \in [g^0]$),</li>
+  <li>The Dirac neutrino Yukawa $Y_{\nu D}$ has NNI form ($H_U \in [g^1]$),</li>
+  <li>The right-handed Majorana mass $M_R$ is diagonal (guaranteed by the non-invertible symmetry),</li>
+</ul>
+<p>
+  is reproduced. This texture is consistent with observed neutrino oscillation data (normal hierarchy).
+</p>
+
+<!-- ====================================================== -->
+<h2>5. Connection to Zero Modes of Magnetized Orbifold Models</h2>
+
+<p>
+  This is where the paper's construction meets string theory.
+  The non-invertible symmetry studied here is not just a bottom-up invention &mdash;
+  it arises naturally in <strong>magnetized D-brane models on $T^2/\mathbb{Z}_2$ orbifolds</strong>,
+  as shown in Ref.&nbsp;[Kobayashi&ndash;Otsuka&ndash;Tanimoto 2024] and rooted in the
+  magnetized orbifold framework of Ref.&nbsp;[Abe&ndash;Kobayashi&ndash;Ohki 2008].
+</p>
+
+<h3>5.1 The $\mathbb{Z}_M$ symmetry from the magnetized torus</h3>
+<p>
+  On $T^2$ with magnetic flux $M$, there are $|M|$ chiral zero-modes with wave functions
+</p>
+<div class="eq">
+$$\Theta^j(y) \propto e^{-M\pi y_4^2}\,\vartheta\!\left[\begin{smallmatrix} j/M \\ 0 \end{smallmatrix}\right]\!(M z, M\tau),
+\qquad j = 0, 1, \ldots, M-1.$$
+</div>
+<p>
+  These $M$ zero-modes are quasi-localized at different positions on $T^2$.
+  They carry a <strong>$\mathbb{Z}_M$ charge</strong> $j$ originating from the discrete translation symmetry of the torus:
+  a shift by $1/M$ of a lattice period maps $\Theta^j \to e^{2\pi i j/M}\,\Theta^j$.
+  The Yukawa selection rule on the torus is simply $\mathbb{Z}_M$ charge conservation:
+</p>
+<div class="eq">
+$$j_1 + j_2 + j_3 \equiv 0 \pmod{M}.$$
+</div>
+
+<h3>5.2 Orbifolding: $\mathbb{Z}_2$ identification $\Rightarrow$ non-invertible symmetry</h3>
+<p>
+  Now orbifold: $T^2 \to T^2/\mathbb{Z}_2$, identifying $y \sim -y$.
+  The $\mathbb{Z}_2$ acts on zero-modes as $\Theta^j(-y) = \Theta^{M-j}(y)$,
+  so it <strong>identifies</strong> mode $j$ with mode $M-j$.
+  The surviving zero-modes on the orbifold are the $\mathbb{Z}_2$-projected combinations:
+</p>
+<div class="eq">
+$$\Theta^j_{\rm even} = \frac{1}{\sqrt{2}}\bigl(\Theta^j + \Theta^{M-j}\bigr), \qquad
+\Theta^j_{\rm odd} = \frac{1}{\sqrt{2}}\bigl(\Theta^j - \Theta^{M-j}\bigr).$$
+</div>
+<p>
+  The number of surviving zero-modes on the orbifold is $\lfloor M/2 \rfloor + 1$ (for one parity sector) &mdash;
+  <em>exactly the number of classes $[g^k]$</em> of the non-invertible symmetry.
+</p>
+
+<div class="connection">
+  <span class="key">The dictionary:</span>
+  <table>
+    <tr><th>Magnetized orbifold</th><th>Non-invertible symmetry</th></tr>
+    <tr><td>Magnetic flux $M$ on $T^2$</td><td>Order $M$ of original $\mathbb{Z}_M$</td></tr>
+    <tr><td>$M$ torus zero-modes $\Theta^j$</td><td>$M$ representations of $\mathbb{Z}_M$</td></tr>
+    <tr><td>Orbifold $\mathbb{Z}_2$: $y \mapsto -y$</td><td>Gauging $\mathbb{Z}_2$: $g \mapsto g^{-1}$</td></tr>
+    <tr><td>$\Theta^j$ and $\Theta^{M-j}$ form even/odd pairs</td><td>Charges $k$ and $M-k$ identified into class $[g^k]$</td></tr>
+    <tr><td>$\lfloor M/2\rfloor + 1$ orbifold zero-modes</td><td>$\lfloor M/2\rfloor + 1$ non-invertible representations</td></tr>
+    <tr><td>Yukawa = overlap integral $\int \Theta^{j_1}\Theta^{j_2}\Theta^{j_3}$</td><td>Coupling allowed iff $\sum \pm k_i \equiv 0$</td></tr>
+  </table>
+</div>
+
+<h3>5.3 Why the orbifold selection rule is non-invertible</h3>
+<p>
+  On the torus, each zero-mode $\Theta^j$ has a <em>single</em> well-defined $\mathbb{Z}_M$ charge $j$.
+  This is an ordinary (invertible) symmetry.
+</p>
+<p>
+  On the orbifold, the physical zero-mode $\Theta^j_{\rm even} = (\Theta^j + \Theta^{M-j})/\sqrt{2}$
+  is a superposition of the original modes with charges $j$ and $M-j$.
+  It does not have a definite charge under $\mathbb{Z}_M$ &mdash; it carries <em>both</em> charges simultaneously.
+  When computing the Yukawa overlap integral, either "branch" ($j$ or $M-j$) can contribute,
+  so the coupling is non-zero whenever <em>any</em> sign choice gives $\sum \pm k_i \equiv 0 \pmod{M}$.
+</p>
+<p>
+  For $M$ odd, no residual invertible symmetry survives &mdash; the selection rule is purely non-invertible.
+  For $M$ even, only a $\mathbb{Z}_2$ invertible part survives (even $k$ vs.&nbsp;odd $k$),
+  but the full selection rule is still more restrictive than $\mathbb{Z}_2$.
+</p>
+
+<h3>5.4 Concrete example: $M=5$ on $T^2/\mathbb{Z}_2$</h3>
+<p>
+  Flux $M = 5$ gives 5 torus zero-modes: $\Theta^0, \Theta^1, \Theta^2, \Theta^3, \Theta^4$.
+  Under $\mathbb{Z}_2$: $\Theta^0$ is self-identified, $\Theta^1 \leftrightarrow \Theta^4$,
+  $\Theta^2 \leftrightarrow \Theta^3$. The orbifold zero-modes (even parity) are:
+</p>
+<div class="eq">
+$$\Theta^0_{\rm even} \longleftrightarrow [g^0], \qquad
+\frac{\Theta^1 + \Theta^4}{\sqrt{2}} \longleftrightarrow [g^1], \qquad
+\frac{\Theta^2 + \Theta^3}{\sqrt{2}} \longleftrightarrow [g^2].$$
+</div>
+<p>
+  These are exactly 3 zero-modes &mdash; perfect for three generations. The Yukawa coupling for a
+  Higgs field in class $[g^1]$ is non-zero if and only if
+  $\pm k_L \pm k_R \pm 1 \equiv 0 \pmod{5}$,
+  which gives precisely the NNI texture.
+</p>
+<p>
+  In the magnetized orbifold language, this texture arises because the overlap integrals
+  $\int \Theta^{k_L}_{\rm even}\,\Theta^{k_R}_{\rm even}\,\Theta^{1}_{\rm even}$
+  vanish for certain combinations by the $\mathbb{Z}_M$ selection rule acting on the constituent
+  torus modes, and survive for others where one of the two "branches" ($j$ or $M-j$) can
+  make the charges add up.
+</p>
+
+<!-- ====================================================== -->
+<h2>6. The Big Picture</h2>
+
+<div class="highlight">
+  <span class="key">Top-down meets bottom-up:</span>
+  <ul>
+    <li><strong>Top-down (string theory):</strong> Magnetized D-branes on $T^2/\mathbb{Z}_2$ naturally produce
+    zero-modes whose Yukawa couplings obey a non-invertible selection rule.
+    The $\mathbb{Z}_M$ from the torus translation is broken by the orbifold to something that is
+    <em>not a group</em> but a fusion category.</li>
+    <li><strong>Bottom-up (this paper):</strong> Abstract the non-invertible selection rule away from
+    the string construction and use it as a model-building tool. The result: Yukawa textures
+    like NNI that no conventional symmetry can enforce, applied successfully to quarks and leptons.</li>
+  </ul>
+  <p>
+    The connection is not just an analogy. The paper explicitly states (Section 2, footnotes) that
+    the $\mathbb{Z}_M$ is the discrete translation on the torus, and the $\mathbb{Z}_2$ gauging
+    corresponds to the $T^2/\mathbb{Z}_2$ orbifold. The number of non-invertible representations
+    equals the number of orbifold zero-modes. The coupling selection rule is the same.
+  </p>
+</div>
+
+<hr>
+<p class="ref">
+  Based on: T. Kobayashi, H. Otsuka, M. Tanimoto,
+  <em>Yukawa textures from non-invertible symmetries</em>, arXiv:2409.05270;
+  and H. Abe, T. Kobayashi, H. Ohki,
+  <em>Magnetized orbifold models</em>, arXiv:0806.4748.
+</p>
+
+</body>
+</html>
